@@ -1,0 +1,27 @@
+.Navbar {
+  background-color: var(--color-primary-400);
+  padding: 1.2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.Navbar_container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.Navbar_container nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Navbar_logo {
+  font-size: 1.5rem;
+}
+
+.Navbar_links {
+  display: flex;
+  gap: 1.5rem;
+}

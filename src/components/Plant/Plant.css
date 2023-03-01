@@ -1,0 +1,48 @@
+.Plant-search {
+}
+
+.Plant-list {
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
+}
+
+.Plant-list_thumbnail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  justify-content: flex-start;
+  width: 100%;
+  text-align: center;
+  gap: 1rem;
+  border-radius: 3px;
+  border-radius: 50%;
+}
+
+.Plant-list_name {
+  font-size: 0.8rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.Plant-list_img {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transform: translateY(0);
+  transition: all 0.2s ease-in-out;
+}
+
+.Plant-list_thumbnail:hover .Plant-list_img {
+  filter: brightness(1.1);
+  transform: translateY(-0.5rem) scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+.Plant-list_thumbnail:hover .Plant-list_name {
+  color: #fff;
+  transform: translateY(-0.3rem) scale(1.04);
+}
