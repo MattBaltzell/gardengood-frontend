@@ -1,17 +1,23 @@
-import { useState,useEffect } from 'react';
-import './App.css';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import "./App.css";
+import axios from "axios";
 
+import PlantGrid from "./components/Plant/PlantGrid";
 function App() {
+  const [plants, setPlants] = useState([]);
 
-  const [plants, setPlants] = useState([])
-
-useEffect(() => {
+  useEffect(() => {
     async function getPlants() {
       try {
-        const res = await axios.get('http://localhost:3001/plants');
+        const res = await axios({
+          url: "http://localhost:3001/plants",
+          method: "GET",
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RhZG1pbiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Nzc2NDA3Mzl9.HoNDrjYXseNCN6CIKkCB9FqT6ecJumAVNE6OeTg1WLk`,
+          },
+        });
         const plants = res.data.plants;
-        console.log(res.data.plants);
+
         setPlants(plants);
       } catch (error) {
         console.error(error);
@@ -22,15 +28,7 @@ useEffect(() => {
   return (
     <div className="App">
       <div className="container">
-        {plants.map(plant=>{
-          return (
-            <div key={plant.id} className='Plant'>
-            <img className="Plant-img" alt={plant.name} src={plant.imgUrl}/>
-            <h3>{plant.name}</h3>
-            <p>{plant.description}</p>
-          </div>
-          )
-        })}
+        <PlantGrid plants={plants} />
       </div>
     </div>
   );
