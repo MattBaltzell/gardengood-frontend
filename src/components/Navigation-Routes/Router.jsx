@@ -1,8 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import PlantSearch from "../Plant/PlantSearch";
+import Plant from "../Plant/Plant";
 
-const Router = ({ plants, search }) => {
+const Router = ({ handleIsLoading, isLoading }) => {
   return (
     <div className="container">
       <Routes>
@@ -16,8 +17,15 @@ const Router = ({ plants, search }) => {
         />
         <Route
           path="/plants"
-          element={<PlantSearch plants={plants} search={search} />}
+          element={
+            <PlantSearch
+              isLoading={isLoading}
+              handleIsLoading={handleIsLoading}
+            />
+          }
         />
+        <Route path="/plants/:id" element={<Plant />} />
+
         <Route
           path="/logout"
           element={
