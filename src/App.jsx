@@ -1,43 +1,76 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import axios from "axios";
-
-import PlantSearch from "./components/Plant/PlantSearch";
+import Router from "./components/Navigation-Routes/Router";
 import Navbar from "./components/Navigation-Routes/Navbar";
-function App() {
-  const [plantsList, setPlantsList] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+import GardenGoodApi from "./api/api";
+import UserContext from "./auth/UserContext";
+import jwt_decode from "jwt-decode";
 
-  const searchPlants = (term) => {
-    setSearchTerm(term);
-  };
+function App() {
+  const [currUser, setCurrUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem("gardengood-token"));
+  const [userWasUpdated, setUserWasUpdated] = useState(false);
 
   useEffect(() => {
-    async function getPlants(filterTerm) {
-      try {
-        let res = await axios({
-          url: !filterTerm
-            ? "http://localhost:3001/plants/"
-            : `http://localhost:3001/plants?name=${filterTerm}`,
-          method: "GET",
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RhZG1pbiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Nzc2NDA3Mzl9.HoNDrjYXseNCN6CIKkCB9FqT6ecJumAVNE6OeTg1WLk`,
-          },
-        });
-        const plants = res.data.plants;
-        setPlantsList(plants);
-      } catch (error) {
-        console.error(error);
+    const getCurrUser = async () => {
+      if (token) {
+        try {
+          GardenGoodApi.token = token;
+          let { username } = jwt_decode(token);
+          const user = await GardenGoodApi.getCurrentUser(username);
+          setCurrUser(user);
+          localStorage.setItem("gardengood-token", token);
+        } catch (error) {
+          console.error(error);
+        }
       }
+    };
+    getCurrUser();
+
+    setUserWasUpdated(false);
+  }, [token, userWasUpdated]);
+
+  const login = async ({ username, password }) => {
+    try {
+      const token = await GardenGoodApi.login({ username, password });
+      setToken(token);
+    } catch (error) {
+      return { message: error };
     }
-    getPlants(searchTerm);
-  }, [searchTerm]);
+  };
+
+  const signup = async ({ username, password, firstName, lastName, email }) => {
+    try {
+      const token = await GardenGoodApi.signup({
+        username,
+        password,
+        firstName,
+        lastName,
+        email,
+      });
+      setToken(token);
+    } catch (error) {
+      return { message: error };
+    }
+  };
+
+  const logout = async () => {
+    try {
+      setToken(null);
+      setCurrUser(null);
+      GardenGoodApi.token = null;
+      localStorage.setItem("gardengood-token", "");
+    } catch (error) {
+      return { message: error };
+    }
+  };
+
   return (
     <div className="App">
-      <Navbar />
-      <div className="container">
-        <PlantSearch plants={plantsList} search={searchPlants} />
-      </div>
+      <UserContext.Provider value={currUser}>
+        <Navbar />
+        <Router login={login} signup={signup} logout={logout} />
+      </UserContext.Provider>
     </div>
   );
 }
