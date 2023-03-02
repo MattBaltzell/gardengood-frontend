@@ -1,7 +1,12 @@
 .Plant-search {
+  display: flex;
+  gap: 1.25rem;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
-.Plant-list {
+.Plant-search .Plant-list {
   max-width: 1200px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -9,7 +14,12 @@
   width: 100%;
 }
 
-.Plant-list_thumbnail {
+.Plant-search__form {
+  margin-bottom: 1rem;
+  max-width: Min(90%, 400px);
+}
+
+.Plant-list__thumbnail {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,17 +27,18 @@
   justify-content: flex-start;
   width: 100%;
   text-align: center;
-  gap: 1rem;
+  gap: 0.5rem;
   border-radius: 3px;
   border-radius: 50%;
+  margin-bottom: 0.5rem;
 }
 
-.Plant-list_name {
+.Plant-list__name {
   font-size: 0.8rem;
   transition: all 0.2s ease-in-out;
 }
 
-.Plant-list_img {
+.Plant-list__img {
   object-fit: cover;
   width: 100%;
   border-radius: 50%;
@@ -37,12 +48,33 @@
   transition: all 0.2s ease-in-out;
 }
 
-.Plant-list_thumbnail:hover .Plant-list_img {
+.Plant-list__thumbnail:hover .Plant-list__img {
   filter: brightness(1.1);
-  transform: translateY(-0.5rem) scale(1.05);
+  transform: translateY(-0.8rem) scale(1.03);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  outline: var(--outline-primary-1);
 }
-.Plant-list_thumbnail:hover .Plant-list_name {
+.Plant-list__thumbnail:hover .Plant-list__name {
   color: #fff;
-  transform: translateY(-0.3rem) scale(1.04);
+  transform: scale(1.1);
+}
+
+@media screen and (min-width: 530px) {
+  .Plant-search .Plant-list {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 760px) {
+  .Plant-search .Plant-list {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .Plant-search .Plant-list {
+    grid-template-columns: repeat(8, 1fr);
+    gap: 2rem;
+  }
 }
