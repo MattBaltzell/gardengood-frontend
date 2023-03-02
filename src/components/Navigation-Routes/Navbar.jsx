@@ -1,11 +1,12 @@
 import "./Navbar.css";
+import gardenGoodLogo from "../../GardenGood-logo.svg";
 
 const Navbar = () => {
   return (
     <div className="Navbar">
       <div className="Navbar_container">
         <nav>
-          <div className="Navbar_logo">GardenGood</div>
+          <img className="Navbar_logo" src={gardenGoodLogo} alt="GardenGood" />
           <div className="Navbar_links">
             <p>Plants</p>
             <p>My Garden</p>

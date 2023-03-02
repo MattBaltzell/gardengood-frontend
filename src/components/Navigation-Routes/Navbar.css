@@ -1,9 +1,10 @@
 .Navbar {
-  background-color: var(--color-primary-400);
+  background-color: var(--color-neutral-600);
   padding: 1.2rem;
   width: 100%;
   display: flex;
   justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .Navbar_container {
@@ -18,7 +19,7 @@
 }
 
 .Navbar_logo {
-  font-size: 1.5rem;
+  width: 200px;
 }
 
 .Navbar_links {
