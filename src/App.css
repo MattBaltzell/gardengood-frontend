@@ -5,6 +5,7 @@
   align-items: center;
   width: 100%;
   min-height: 100vh;
+  height: 100%;
   background-color: var(--color-neutral-800);
   color: var(--color-neutral-200);
 }
@@ -14,4 +15,64 @@
   justify-content: center;
   padding: 1rem;
   width: 100%;
+}
+
+.pulsing {
+  opacity: 0.1;
+  /* Chrome, Safari, Opera */
+  -webkit-animation: pulsing 3s ease-in-out infinite;
+
+  /* Internet Explorer */
+  -ms-animation: pulsing 3s ease-in-out infinite;
+
+  /* Standard Syntax */
+  animation: pulsing 3s ease-in-out infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes pulsing {
+  0% {
+    opacity: 0.1;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+/* Internet Explorer */
+@-ms-keyframes pulsing {
+  0% {
+    opacity: 0.1;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+/* Standard Syntax */
+@keyframes pulsing {
+  0% {
+    opacity: 0.1;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
 }

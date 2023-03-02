@@ -3,8 +3,9 @@ import GardenGoodApi from "../../api/api";
 import "./Plant.css";
 import "../Form/Form.css";
 import PlantList from "./PlantList";
+import { BallTriangle } from "react-loader-spinner";
 
-const PlantSearch = () => {
+const PlantSearch = ({ isLoading, handleIsLoading }) => {
   const [plantsList, setPlantsList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -16,13 +17,14 @@ const PlantSearch = () => {
     async function getPlants(filterTerm) {
       try {
         const plants = await GardenGoodApi.getAllPlants(filterTerm);
-        setPlantsList(plants);
+        await setPlantsList(plants);
+        handleIsLoading(false);
       } catch (error) {
         console.error(error);
       }
     }
     getPlants(searchTerm);
-  }, [searchTerm]);
+  }, [searchTerm, handleIsLoading]);
 
   const INITIAL_STATE = { searchTerm: "" };
   const [formData, setFormData] = useState(INITIAL_STATE);
@@ -54,10 +56,28 @@ const PlantSearch = () => {
           onChange={handleChange}
           type="text"
           value={formData.searchTerm}
-          placeholder="Search plant name"
+          placeholder="Start typing plant name"
         />
       </form>
-      <PlantList plants={plantsList} />
+      {isLoading ? (
+        <>
+          <BallTriangle
+            height={100}
+            width={100}
+            radius={5}
+            color="var(--color-primary-400)"
+            ariaLabel="ball-triangle-loading"
+            wrapperClass={{}}
+            wrapperStyle=""
+            visible={true}
+          />
+          <p className="pulsing">Loading...</p>
+        </>
+      ) : plantsList.length === 0 ? (
+        <p>No plants found.</p>
+      ) : (
+        <PlantList plants={plantsList} />
+      )}
     </main>
   );
 };
