@@ -26,7 +26,6 @@ function App() {
         });
         const plants = res.data.plants;
         setPlantsList(plants);
-        console.log(plants);
       } catch (error) {
         console.error(error);
       }
