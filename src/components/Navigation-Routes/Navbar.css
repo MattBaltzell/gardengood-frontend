@@ -7,22 +7,35 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.Navbar_container {
+.Navbar__container {
   width: 100%;
   max-width: 1200px;
 }
 
-.Navbar_container nav {
+.Navbar__container nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.Navbar_logo {
+.Navbar__logo {
   width: 200px;
 }
 
-.Navbar_links {
+.Navbar__links {
   display: flex;
   gap: 1.5rem;
+}
+
+.Navbar__links a {
+  text-decoration: none;
+  color: var(--color-neutral-200);
+}
+
+.Navbar__links a.active {
+  color: var(--color-neutral-100);
+}
+
+.Navbar__links a:hover {
+  color: var(--color-neutral-100);
 }
