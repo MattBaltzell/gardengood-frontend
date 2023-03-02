@@ -47,6 +47,11 @@ class GardenGoodApi {
       : await this.request(`plants?name=${filterTerm}`);
     return res.plants;
   }
+
+  static async getPlant(id) {
+    const res = await this.request(`plants/${id}`);
+    return res.plant;
+  }
 }
 
 // Temporary admin token for development
