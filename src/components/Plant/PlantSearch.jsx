@@ -1,9 +1,29 @@
 import React, { useState, useEffect } from "react";
+import GardenGoodApi from "../../api/api";
 import "./Plant.css";
 import "../Form/Form.css";
 import PlantList from "./PlantList";
 
-const PlantSearch = ({ plants, search }) => {
+const PlantSearch = () => {
+  const [plantsList, setPlantsList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const search = (term) => {
+    setSearchTerm(term);
+  };
+
+  useEffect(() => {
+    async function getPlants(filterTerm) {
+      try {
+        const plants = await GardenGoodApi.getAllPlants(filterTerm);
+        setPlantsList(plants);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getPlants(searchTerm);
+  }, [searchTerm]);
+
   const INITIAL_STATE = { searchTerm: "" };
   const [formData, setFormData] = useState(INITIAL_STATE);
 
@@ -15,7 +35,7 @@ const PlantSearch = ({ plants, search }) => {
 
   useEffect(() => {
     return () => {
-      setFormData(INITIAL_STATE);
+      setFormData({ searchTerm: "" });
     };
   }, []);
 
@@ -37,7 +57,7 @@ const PlantSearch = ({ plants, search }) => {
           placeholder="Search plant name"
         />
       </form>
-      <PlantList plants={plants} />
+      <PlantList plants={plantsList} />
     </main>
   );
 };
