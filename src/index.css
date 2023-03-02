@@ -1,5 +1,17 @@
 :root {
-  --color-primary-400: red;
+  --color-primary-400: #26c281;
+
+  --color-neutral-100: #f2f0f4;
+  --color-neutral-200: #cbc3d5;
+  --color-neutral-300: #a397b5;
+  --color-neutral-400: #7c6a95;
+  --color-neutral-500: #635577;
+  --color-neutral-600: #4a3f5a;
+  --color-neutral-700: #3e354b;
+  --color-neutral-800: #322a3c;
+  --color-neutral-900: #25202d;
+
+  --outline-primary-1: 4px solid var(--color-primary-400);
 }
 
 body {
