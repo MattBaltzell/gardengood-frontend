@@ -1,9 +1,16 @@
 import React from "react";
-import useFormFields from "../hooks/useFormFields";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../components/Form/Form.css";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import { MyTextInput, MyPasswordInput } from "../components/Form/Forms";
 
 const SignupForm = ({ signup }) => {
+  // Pass the useFormik() hook initial form values, a validate function that will be called when
+  // form values change or fields are blurred, and a submit function that will
+  // be called when the form is submitted
+  const navigate = useNavigate();
+
   const INITIAL_STATE = {
     username: "",
     password: "",
@@ -12,74 +19,57 @@ const SignupForm = ({ signup }) => {
     email: "",
     zipCode: "",
   };
-  const { formData, setFormData, handleChange } = useFormFields(INITIAL_STATE);
-
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    signup(formData);
-    setFormData(INITIAL_STATE);
-    navigate("/");
-  };
 
   return (
     <main className="Form">
       <div className="Home__bg"></div>
 
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          name="username"
-          type="text"
-          onChange={handleChange}
-          value={formData.username}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          onChange={handleChange}
-          value={formData.password}
-        />
-        <label htmlFor="firstName">First name</label>
-        <input
-          id="firstName"
-          name="firstName"
-          type="text"
-          onChange={handleChange}
-          value={formData.firstName}
-        />
-        <label htmlFor="lastName">Last name</label>
-        <input
-          id="lastName"
-          name="lastName"
-          type="text"
-          onChange={handleChange}
-          value={formData.lastName}
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          onChange={handleChange}
-          value={formData.email}
-        />
-        <label htmlFor="zipCode">Zip Code</label>
-        <input
-          id="zipCode"
-          name="zipCode"
-          type="text"
-          pattern="[0-9]{5}"
-          onChange={handleChange}
-          value={formData.zipCode}
-        />
-        <button>Create Account</button>
-      </form>
+
+      <Formik
+        initialValues={{ ...INITIAL_STATE }}
+        validationSchema={Yup.object({
+          username: Yup.string()
+            .max(25, "Must be 25 characters or less")
+            .required("Required"),
+          password: Yup.string()
+            .min(8, "Must be 8 characters or more")
+            .required("Required"),
+          firstName: Yup.string()
+            .max(25, "Must be 25 characters or less")
+            .required("Required"),
+          lastName: Yup.string()
+            .max(30, "Must be 30 characters or less")
+            .required("Required"),
+          email: Yup.string()
+            .email("Invalid email address")
+            .required("Required"),
+          zipCode: Yup.string()
+            .length(5, "Must be exactly 5 characters")
+            .required("Required"),
+        })}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            signup(values);
+            navigate("/");
+          }, 400);
+        }}
+      >
+        <Form>
+          <MyTextInput label="Username" name="username" type="text" />
+          <MyTextInput label="Email" name="email" type="text" />
+          <MyPasswordInput label="Password" name="password" type="password" />
+          <MyTextInput label="First Name" name="firstName" type="text" />
+          <MyTextInput label="Last Name" name="lastName" type="text" />
+          <MyTextInput
+            label="Zip Code"
+            name="zipCode"
+            type="text"
+            pattern="[0-9]{5}"
+          />
+          <button type="submit">Create Account</button>
+        </Form>
+      </Formik>
       <p>
         Already have an account? <Link to="/login">Log in</Link>
       </p>

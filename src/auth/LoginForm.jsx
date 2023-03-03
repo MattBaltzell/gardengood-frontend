@@ -1,20 +1,20 @@
 import React from "react";
 import useFormFields from "../hooks/useFormFields";
 import { useNavigate, Link } from "react-router-dom";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import { MyTextInput, MyPasswordInput } from "../components/Form/Forms";
 import "../components/Form/Form.css";
 
 const LoginForm = ({ login }) => {
-  const INITIAL_STATE = { username: "", password: "" };
-  const { formData, setFormData, handleChange } = useFormFields(INITIAL_STATE);
-
+  // Pass the useFormik() hook initial form values, a validate function that will be called when
+  // form values change or fields are blurred, and a submit function that will
+  // be called when the form is submitted
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    login(formData);
-    setFormData(INITIAL_STATE);
-
-    navigate("/");
+  const INITIAL_STATE = {
+    username: "",
+    password: "",
   };
 
   return (
@@ -22,27 +22,31 @@ const LoginForm = ({ login }) => {
       <div className="Home__bg"></div>
 
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          name="username"
-          type="text"
-          onChange={handleChange}
-          value={formData.username}
-          autoComplete="username"
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          onChange={handleChange}
-          value={formData.password}
-          autoComplete="current-password"
-        />
-        <button>Submit</button>
-      </form>
+
+      <Formik
+        initialValues={{ ...INITIAL_STATE }}
+        validationSchema={Yup.object({
+          username: Yup.string()
+            .max(25, "Must be 25 characters or less")
+            .required("Required"),
+          password: Yup.string()
+            .min(8, "Must be 8 characters or more")
+            .required("Required"),
+        })}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            login(values);
+            navigate("/");
+          }, 400);
+        }}
+      >
+        <Form>
+          <MyTextInput label="Username" name="username" type="text" />
+          <MyPasswordInput label="Password" name="password" type="password" />
+          <button type="submit">Log In</button>
+        </Form>
+      </Formik>
+
       <p>
         No Account? <Link to="/signup">Create one</Link>
       </p>
