@@ -5,9 +5,11 @@
   align-items: center;
   width: 100%;
   min-height: 100vh;
+  z-index: 20;
   height: 100%;
   background-color: var(--color-neutral-800);
   color: var(--color-neutral-200);
+  position: relative;
 }
 
 .container {
