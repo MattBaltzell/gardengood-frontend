@@ -23,11 +23,13 @@
   background-color: #fff;
   padding: 2rem;
   border-radius: 4px;
+  text-align: left;
 }
 
 .Form label {
   margin-bottom: 0.4rem;
-  color: rgb(40, 40, 40);
+  color: var(--color-neutral-500);
+  font-weight: 500;
 }
 
 .Form input {
@@ -35,13 +37,15 @@
   padding: 0.5rem 1rem;
   width: 100%;
   border: none;
-  border-bottom: 2px solid var(--color-primary-400);
+  border-radius: 3px;
+  border-bottom: 3px solid var(--color-primary-400);
   margin-bottom: 0.6rem;
-  color: var(--color-neutral-800);
+  text-align: left;
+  background-color: var(--color-primary-100);
 }
 
 .Form input:focus {
-  outline: var(--outline-primary-1);
+  outline: var(--outline-primary-2);
   border-color: transparent;
   border-radius: 3px;
 }
@@ -63,4 +67,11 @@
 
 .Form button:hover {
   background-color: var(--color-primary-200);
+}
+
+.error {
+  color: hsl(10, 85%, 50%);
+  padding: 0;
+  width: 100%;
+  font-size: 0.9rem;
 }

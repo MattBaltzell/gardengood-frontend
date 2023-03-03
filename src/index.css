@@ -1,4 +1,5 @@
 :root {
+  --color-primary-100: hsl(155, 67%, 95%);
   --color-primary-200: hsl(155, 67%, 70%);
   --color-primary-400: #26c281;
 
@@ -13,6 +14,7 @@
   --color-neutral-900: #25202d;
 
   --outline-primary-1: 4px solid var(--color-primary-400);
+  --outline-primary-2: 3px solid var(--color-primary-400);
 }
 
 *,
