@@ -7,7 +7,7 @@ import UserContext from "./auth/UserContext";
 import jwt_decode from "jwt-decode";
 
 function App() {
-  const [currUser, setCurrUser] = useState(null);
+  const [currUser, setCurrUser] = useState({});
   const [token, setToken] = useState(localStorage.getItem("gardengood-token"));
   const [userWasUpdated, setUserWasUpdated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
