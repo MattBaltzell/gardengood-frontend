@@ -35,9 +35,8 @@ const Router = ({ signup, login, handleIsLoading, isLoading }) => {
               />
             }
             path="/plants"
-            exact
           />
-          <Route element={<Plant />} path="/plants/:id" exact />
+          <Route element={<Plant />} path="/plants/:id" />
         </Route>
 
         <Route path="/signup" element={<SignupForm signup={signup} />} />
