@@ -35,6 +35,41 @@ class GardenGoodApi {
   // Individual API routes
 
   //////////////////////////////////////////////////////
+  // USER ROUTES
+
+  /**
+   * Get details on a user by username.
+   * */
+
+  static async getCurrentUser(username) {
+    const res = await this.request(`users/${username}`);
+    return res.user;
+  }
+
+  //////////////////////////////////////////////////////
+  // AUTH ROUTES
+
+  /**
+   * Log a user in
+   * - data includes: username, password
+   * */
+
+  static async login(data) {
+    const res = await this.request("auth/token", data, "POST");
+    return res.token;
+  }
+
+  /**
+   * Sign a user up
+   * - data includes: username, password, firstName, lastName, email, zipCode
+   * */
+
+  static async signup(data) {
+    const res = await this.request("auth/register", data, "POST");
+    return res.token;
+  }
+
+  //////////////////////////////////////////////////////
   // PLANTS ROUTES
 
   /**
@@ -55,6 +90,6 @@ class GardenGoodApi {
 }
 
 // Temporary admin token for development
-GardenGoodApi.token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RhZG1pbiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Nzc2NDA3Mzl9.HoNDrjYXseNCN6CIKkCB9FqT6ecJumAVNE6OeTg1WLk`;
+// GardenGoodApi.token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RhZG1pbiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Nzc2NDA3Mzl9.HoNDrjYXseNCN6CIKkCB9FqT6ecJumAVNE6OeTg1WLk`;
 
 export default GardenGoodApi;
