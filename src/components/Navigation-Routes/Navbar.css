@@ -1,6 +1,6 @@
 .Navbar {
   background-color: var(--color-neutral-600);
-  padding: 1.2rem;
+  padding: 1.2rem 1rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -70,4 +70,10 @@ a.Navbar__logo-link {
   transform: translateX(0);
   opacity: 1;
   position: absolute;
+}
+
+@media screen and (min-width: 800px) {
+  .Navbar {
+    padding: 1.2rem 3rem;
+  }
 }
