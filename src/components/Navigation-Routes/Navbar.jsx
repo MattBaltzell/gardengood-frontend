@@ -11,7 +11,7 @@ const Navbar = () => {
     <div className="Navbar">
       <div className="Navbar__container">
         <nav>
-          <NavLink to="/">
+          <NavLink to="/" className="Navbar__logo-link">
             <img
               className="Navbar__logo"
               src={gardenGoodLogo}

@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 .Navbar__container {
@@ -19,7 +20,11 @@
 }
 
 .Navbar__logo {
-  width: 200px;
+  height: 2.2rem;
+}
+
+a.Navbar__logo-link {
+  display: flex;
 }
 
 .Navbar__links {
@@ -30,12 +35,39 @@
 .Navbar__links a {
   text-decoration: none;
   color: var(--color-neutral-200);
+  position: relative;
+}
+
+.Navbar__links a::after {
+  content: "";
+  height: 3px;
+  width: 0;
+  opacity: 0;
+  margin: 0 auto;
+  background-color: var(--color-primary-400);
+  bottom: -0.6rem;
+  left: 0;
+  right: 0;
+  transition: all 0.3s ease-in-out;
 }
 
 .Navbar__links a.active {
   color: var(--color-neutral-100);
 }
 
+.Navbar__links a.active::after {
+  width: 100%;
+  opacity: 1;
+  position: absolute;
+}
+
 .Navbar__links a:hover {
   color: var(--color-neutral-100);
+}
+
+.Navbar__links a:hover::after {
+  width: 100%;
+  transform: translateX(0);
+  opacity: 1;
+  position: absolute;
 }
