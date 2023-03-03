@@ -1,39 +1,48 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import PlantSearch from "../Plant/PlantSearch";
 import Plant from "../Plant/Plant";
+import Home from "../../Home/Home";
+import SignupForm from "../../auth/SignupForm";
+import LoginForm from "../../auth/LoginForm";
+import UserContext from "../../auth/UserContext";
+import PrivateRoutes from "./PrivateRoutes";
 
-const Router = ({ handleIsLoading, isLoading }) => {
+const Router = ({ signup, login, handleIsLoading, isLoading }) => {
+  const user = useContext(UserContext);
   return (
     <div className="container">
       <Routes>
         <Route
           path="/"
           element={
-            <>
-              <h1>Home Page</h1>
-            </>
+            !user ? (
+              <Home />
+            ) : (
+              <>
+                <h1>Welcome back, {user.firstName}!</h1>
+              </>
+            )
           }
         />
-        <Route
-          path="/plants"
-          element={
-            <PlantSearch
-              isLoading={isLoading}
-              handleIsLoading={handleIsLoading}
-            />
-          }
-        />
-        <Route path="/plants/:id" element={<Plant />} />
 
-        <Route
-          path="/logout"
-          element={
-            <>
-              <h1>Logged Out</h1>
-            </>
-          }
-        />
+        <Route element={<PrivateRoutes />}>
+          <Route
+            element={
+              <PlantSearch
+                isLoading={isLoading}
+                handleIsLoading={handleIsLoading}
+              />
+            }
+            path="/plants"
+            exact
+          />
+          <Route element={<Plant />} path="/plants/:id" exact />
+        </Route>
+
+        <Route path="/signup" element={<SignupForm signup={signup} />} />
+        <Route path="/login" element={<LoginForm login={login} />} />
+
         <Route
           path="*"
           element={

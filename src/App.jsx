@@ -44,7 +44,14 @@ function App() {
     }
   };
 
-  const signup = async ({ username, password, firstName, lastName, email }) => {
+  const signup = async ({
+    username,
+    password,
+    firstName,
+    lastName,
+    email,
+    zipCode,
+  }) => {
     try {
       const token = await GardenGoodApi.signup({
         username,
@@ -52,6 +59,7 @@ function App() {
         firstName,
         lastName,
         email,
+        zipCode,
       });
       setToken(token);
     } catch (error) {
@@ -73,7 +81,7 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={currUser}>
-        <Navbar />
+        <Navbar logout={logout} />
         <Router
           login={login}
           signup={signup}

@@ -1,11 +1,17 @@
 import "./Navbar.css";
 import gardenGoodLogo from "../../GardenGood-logo.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import UserContext from "../../auth/UserContext";
 import { useContext } from "react";
 
-const Navbar = () => {
+const Navbar = ({ logout }) => {
   const user = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
+  };
 
   return (
     <div className="Navbar">
@@ -21,14 +27,13 @@ const Navbar = () => {
 
           {!user ? (
             <div className="Navbar__links">
-              <NavLink to="/plants">Plants</NavLink>
-              <NavLink to="/gardens">My Gardens</NavLink>
-              <NavLink to="/logout">Logout</NavLink>
+              <NavLink to="/login">Login</NavLink>
+              <NavLink to="/Signup">Signup</NavLink>
             </div>
           ) : (
             <div className="Navbar__links">
-              <NavLink to="/login">Login</NavLink>
-              <NavLink to="/Signup">Signup</NavLink>
+              <NavLink to="/plants">Plants</NavLink>
+              <Link onClick={handleLogout}>Logout {user.username}</Link>
             </div>
           )}
         </nav>

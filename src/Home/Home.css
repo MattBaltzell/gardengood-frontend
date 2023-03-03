@@ -1,0 +1,61 @@
+.Home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  height: 100%;
+  gap: 2rem;
+  min-height: calc(100vh - 10rem);
+  position: relative;
+}
+
+.Home__bg {
+  background: linear-gradient(
+      90deg,
+      rgba(8, 4, 14, 0.7) 0%,
+      rgba(8, 4, 14, 0.7) 100%
+    ),
+    url("https://gardengood.s3.us-east-2.amazonaws.com/gardening-bg.jpg");
+  position: absolute;
+  z-index: -10;
+  display: block;
+
+  width: 100vw;
+  height: calc(100vh - 20px);
+  background-size: cover;
+}
+
+.Home h1 {
+  font-size: 3.6rem;
+  font-weight: 200;
+  margin: 0;
+}
+.Home h2 {
+  font-size: 2rem;
+}
+
+.Home p {
+  font-size: 1.4rem;
+  max-width: 60ch;
+  font-weight: 300;
+}
+
+.Home a {
+  font-size: 1.2rem;
+  width: 7rem;
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  margin: 0 0.35rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-primary-400);
+  border-radius: 200px;
+  transition: all 0.3s;
+}
+
+.Home a:hover {
+  background-color: var(--color-primary-200);
+  color: var(--color-neutral-900);
+}
