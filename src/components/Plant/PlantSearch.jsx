@@ -50,7 +50,17 @@ const PlantSearch = ({ isLoading, handleIsLoading }) => {
   return (
     <main className="Plant-search">
       <h1>Find a Plant</h1>
-      <form className="Form Plant-search__form" onSubmit={handleSubmit}>
+      <form
+        autoComplete="off"
+        className="Plant-search__form"
+        onSubmit={handleSubmit}
+      >
+        <input
+          autoComplete="false"
+          name="hidden"
+          type="text"
+          style={{ display: "none" }}
+        />
         <input
           className="Form__input--text"
           name="searchTerm"
