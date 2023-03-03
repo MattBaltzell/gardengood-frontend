@@ -18,6 +18,7 @@ const PlantSearch = ({ isLoading, handleIsLoading }) => {
       try {
         const plants = await GardenGoodApi.getAllPlants(filterTerm);
         await setPlantsList(plants);
+
         handleIsLoading(false);
       } catch (error) {
         console.error(error);
