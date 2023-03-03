@@ -6,20 +6,68 @@
   flex-direction: column;
   align-items: center;
 }
+
 .Plant p,
 .Plant h2,
 .Plant h3,
 .Plant h4 {
   align-self: flex-start;
 }
+
+.Plant__info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  width: 100%;
+}
 .Plant__img {
   object-fit: cover;
-  width: 10rem;
-  border-radius: 50%;
+  width: 100%;
+  height: 25vh;
+  border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  position: relative;
   transform: translateY(0);
   transition: all 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+.Plant__info-header {
+  gap: 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -0.75rem;
+}
+
+.Plant__info-header small {
+  background-color: var(--color-neutral-200);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-weight: 500;
+  margin-top: 4px;
+  color: var(--color-neutral-700);
+}
+
+.Plant__img-info-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.Plant__info-group {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+}
+
+.Plant__info h4 {
+  margin-bottom: 0.1rem;
+}
+.Plant__img-info-group {
+  padding: 0;
 }
 
 .Plant-search {

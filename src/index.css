@@ -105,3 +105,12 @@ a {
 a:hover {
   color: var(--color-primary-200);
 }
+
+.center {
+  text-align: center;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-neutral-500);
+}

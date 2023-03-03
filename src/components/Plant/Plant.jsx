@@ -16,7 +16,6 @@ const Plant = () => {
       await setPlant(plant);
       setIsLoading(false);
     };
-
     getPlant();
   }, [id]);
 
@@ -37,32 +36,56 @@ const Plant = () => {
       </main>
     );
   }
-  console.log(plant);
+
   return (
     <main className="Plant">
-      <small>{plant.isPerrenial ? "Perrenial" : "Annual"}</small>
-      <img className="Plant__img" alt={plant.name} src={plant.imgUrl} />
-      <h1>{plant.name}</h1>
-      <h4>Species:</h4>
-      <p>{plant.species}</p>
-      <h4>Days to Maturity</h4>
-      <p>{`${plant.daysToMaturityMin} - ${plant.daysToMaturityMax}`}</p>
-      <h4>Sun Amount</h4>
-      <p>{plant.sunlight.join(", ")}</p>
-      <h4>Growing Seasons</h4>
-      <p>{plant.growingSeasons.join(", ")}</p>
-      <h4>About:</h4>
-      <p>{plant.description}</p>
-      <hr></hr>
-      <h2>Instructions</h2>
-      <h4>Planting</h4>
-      <p>{plant.instructions.planting || "Coming soon."}</p>
+      <div className="Plant__info-container">
+        <div className="Plant__info-header">
+          <h1>{plant.name}</h1>
+          <small>{plant.isPerrenial ? "Perrenial" : "Annual"}</small>
+        </div>
 
-      <h4>Pruning</h4>
-      <p>{plant.instructions.pruning || "Coming soon."}</p>
-
-      <h4>Watering</h4>
-      <p>{plant.instructions.watering || "Coming soon."}</p>
+        <div className="Plant__img-info-group">
+          <img className="Plant__img" alt={plant.name} src={plant.imgUrl} />
+          <div className="Plant__info-group">
+            <div className="Plant__info">
+              <h4>Species:</h4>
+              <p>{plant.species}</p>
+            </div>
+            <div className="Plant__info">
+              <h4>Days to Maturity</h4>
+              <p>{`${plant.daysToMaturityMin} - ${plant.daysToMaturityMax}`}</p>
+            </div>
+            <div className="Plant__info">
+              <h4>Sun Amount</h4>
+              <p>{plant.sunlight.join(", ")}</p>
+            </div>
+            <div className="Plant__info">
+              <h4>Growing Seasons</h4>
+              <p>{plant.growingSeasons.join(", ")}</p>
+            </div>
+          </div>
+        </div>
+        <hr></hr>
+        <div className="Plant__info">
+          <h4>About</h4>
+          <p>{plant.description}</p>
+        </div>
+        <hr></hr>
+        <h2>Instructions</h2>
+        <div className="Plant__info">
+          <h4>Planting</h4>
+          <p>{plant.instructions.planting || "Coming soon."}</p>
+        </div>
+        <div className="Plant__info">
+          <h4>Pruning</h4>
+          <p>{plant.instructions.pruning || "Coming soon."}</p>
+        </div>
+        <div className="Plant__info">
+          <h4>Watering</h4>
+          <p>{plant.instructions.watering || "Coming soon."}</p>
+        </div>
+      </div>
     </main>
   );
 };
