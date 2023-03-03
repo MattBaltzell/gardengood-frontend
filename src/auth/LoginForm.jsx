@@ -1,23 +1,26 @@
-import React from "react";
-import useFormFields from "../hooks/useFormFields";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { MyTextInput, MyPasswordInput } from "../components/Form/Forms";
 import "../components/Form/Form.css";
+import UserContext from "./UserContext";
 
 const LoginForm = ({ login }) => {
   // Pass the useFormik() hook initial form values, a validate function that will be called when
   // form values change or fields are blurred, and a submit function that will
   // be called when the form is submitted
   const navigate = useNavigate();
+  const currUser = useContext(UserContext);
 
   const INITIAL_STATE = {
     username: "",
     password: "",
   };
 
-  return (
+  return currUser ? (
+    <Navigate to="/" />
+  ) : (
     <main className="Form">
       <div className="Home__bg"></div>
 
@@ -33,7 +36,7 @@ const LoginForm = ({ login }) => {
             .min(8, "Must be 8 characters or more")
             .required("Required"),
         })}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values) => {
           setTimeout(() => {
             login(values);
             navigate("/");

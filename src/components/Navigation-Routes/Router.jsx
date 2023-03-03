@@ -9,18 +9,18 @@ import UserContext from "../../auth/UserContext";
 import PrivateRoutes from "./PrivateRoutes";
 
 const Router = ({ signup, login, handleIsLoading, isLoading }) => {
-  const user = useContext(UserContext);
+  const currUser = useContext(UserContext);
   return (
     <div className="container">
       <Routes>
         <Route
           path="/"
           element={
-            !user ? (
+            !currUser ? (
               <Home />
             ) : (
               <>
-                <h1>Welcome back, {user.firstName}!</h1>
+                <h1>Welcome back, {currUser.firstName}!</h1>
               </>
             )
           }
@@ -35,6 +35,7 @@ const Router = ({ signup, login, handleIsLoading, isLoading }) => {
               />
             }
             path="/plants"
+            exact
           />
           <Route element={<Plant />} path="/plants/:id" />
         </Route>
@@ -46,7 +47,7 @@ const Router = ({ signup, login, handleIsLoading, isLoading }) => {
           path="*"
           element={
             <>
-              <h1>NO PAGE</h1>
+              <h1>404: PAGE NOT FOUND</h1>
             </>
           }
         />

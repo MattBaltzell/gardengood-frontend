@@ -1,15 +1,17 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import "../components/Form/Form.css";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { MyTextInput, MyPasswordInput } from "../components/Form/Forms";
+import UserContext from "./UserContext";
 
 const SignupForm = ({ signup }) => {
   // Pass the useFormik() hook initial form values, a validate function that will be called when
   // form values change or fields are blurred, and a submit function that will
   // be called when the form is submitted
   const navigate = useNavigate();
+  const currUser = useContext(UserContext);
 
   const INITIAL_STATE = {
     username: "",
@@ -20,7 +22,9 @@ const SignupForm = ({ signup }) => {
     zipCode: "",
   };
 
-  return (
+  return currUser ? (
+    <Navigate to="/" />
+  ) : (
     <main className="Form">
       <div className="Home__bg"></div>
 

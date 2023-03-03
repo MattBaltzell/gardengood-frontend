@@ -5,12 +5,17 @@ import Navbar from "./components/Navigation-Routes/Navbar";
 import GardenGoodApi from "./api/api";
 import UserContext from "./auth/UserContext";
 import jwt_decode from "jwt-decode";
+import { ToastContainer, toast } from "react-toastify";
 
 function App() {
-  const [currUser, setCurrUser] = useState({});
-  const [token, setToken] = useState(localStorage.getItem("gardengood-token"));
+  const [currUser, setCurrUser] = useState(null);
+  const [token, setToken] = useState(
+    localStorage.getItem("gardengood-token") || ""
+  );
   const [userWasUpdated, setUserWasUpdated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  const notify = () => toast.info("Wow so easy !");
 
   useEffect(() => {
     const getCurrUser = async () => {
@@ -82,6 +87,22 @@ function App() {
     <div className="App">
       <UserContext.Provider value={currUser}>
         <Navbar logout={logout} />
+        <>
+          <button onClick={notify}>Notify!</button>
+        </>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+
         <Router
           login={login}
           signup={signup}
