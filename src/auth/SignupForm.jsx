@@ -1,17 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import "../components/Form/Form.css";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { MyTextInput, MyPasswordInput } from "../components/Form/Forms";
 import UserContext from "./UserContext";
+import { v4 as uuid } from "uuid";
 
-const SignupForm = ({ signup }) => {
+const SignupForm = ({ signup, toast }) => {
   // Pass the useFormik() hook initial form values, a validate function that will be called when
   // form values change or fields are blurred, and a submit function that will
   // be called when the form is submitted
   const navigate = useNavigate();
   const currUser = useContext(UserContext);
+  const [submissionErrors, setSubmissionErrors] = useState([]);
 
   const INITIAL_STATE = {
     username: "",
@@ -52,16 +54,33 @@ const SignupForm = ({ signup }) => {
             .length(5, "Must be exactly 5 characters")
             .required("Required"),
         })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            signup(values);
-            navigate("/");
+        onSubmit={(values) => {
+          setTimeout(async () => {
+            const res = await signup(values);
+            if (res.message.length > 0) {
+              res.message.forEach((m) => {
+                toast("error", m);
+                setSubmissionErrors((errors) => [...errors, m]);
+              });
+            } else {
+              navigate("/");
+            }
           }, 400);
         }}
       >
         <Form>
-          <MyTextInput label="Username" name="username" type="text" />
-          <MyTextInput label="Email" name="email" type="text" />
+          <MyTextInput
+            label="Username"
+            name="username"
+            type="text"
+            autoComplete="username"
+          />
+          <MyTextInput
+            label="Email"
+            name="email"
+            type="text"
+            autoComplete="email"
+          />
           <MyPasswordInput label="Password" name="password" type="password" />
           <MyTextInput label="First Name" name="firstName" type="text" />
           <MyTextInput label="Last Name" name="lastName" type="text" />
@@ -71,6 +90,13 @@ const SignupForm = ({ signup }) => {
             type="text"
             pattern="[0-9]{5}"
           />
+          {submissionErrors
+            ? submissionErrors.map((e) => (
+                <div key={uuid()} className="error center">
+                  {e}
+                </div>
+              ))
+            : null}
           <button type="submit">Create Account</button>
         </Form>
       </Formik>

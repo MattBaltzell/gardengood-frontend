@@ -9,13 +9,13 @@ import { ToastContainer, toast } from "react-toastify";
 
 function App() {
   const [currUser, setCurrUser] = useState(null);
-  const [token, setToken] = useState(
-    localStorage.getItem("gardengood-token") || ""
-  );
+  const [token, setToken] = useState(localStorage.getItem("gardengood-token"));
   const [userWasUpdated, setUserWasUpdated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const notify = () => toast.info("Wow so easy !");
+  const handleToast = (type, msg) => {
+    console.log(toast[type](msg));
+  };
 
   useEffect(() => {
     const getCurrUser = async () => {
@@ -44,6 +44,9 @@ function App() {
     try {
       const token = await GardenGoodApi.login({ username, password });
       setToken(token);
+      const message = `Welcome back, ${username}!`;
+      handleToast("success", message);
+      return { message: message };
     } catch (error) {
       return { message: error };
     }
@@ -67,6 +70,9 @@ function App() {
         zipCode,
       });
       setToken(token);
+
+      const message = `Welcome, ${username}!`;
+      handleToast("success", message);
     } catch (error) {
       return { message: error };
     }
@@ -78,6 +84,8 @@ function App() {
       setCurrUser(null);
       GardenGoodApi.token = null;
       localStorage.setItem("gardengood-token", "");
+      const message = `Successfully logged out.`;
+      handleToast("success", message);
     } catch (error) {
       return { message: error };
     }
@@ -87,12 +95,10 @@ function App() {
     <div className="App">
       <UserContext.Provider value={currUser}>
         <Navbar logout={logout} />
-        <>
-          <button onClick={notify}>Notify!</button>
-        </>
+
         <ToastContainer
           position="top-right"
-          autoClose={5000}
+          autoClose={4000}
           hideProgressBar
           newestOnTop={false}
           closeOnClick
@@ -100,7 +106,7 @@ function App() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme="light"
+          theme="colored"
         />
 
         <Router
@@ -109,6 +115,7 @@ function App() {
           logout={logout}
           handleIsLoading={handleIsLoading}
           isLoading={isLoading}
+          toast={handleToast}
         />
       </UserContext.Provider>
     </div>

@@ -1,17 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate, Link, Navigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { MyTextInput, MyPasswordInput } from "../components/Form/Forms";
 import "../components/Form/Form.css";
 import UserContext from "./UserContext";
+import { v4 as uuid } from "uuid";
+// import { toast } from "react-toastify/dist/components";
 
-const LoginForm = ({ login }) => {
+const LoginForm = ({ login, toast }) => {
   // Pass the useFormik() hook initial form values, a validate function that will be called when
   // form values change or fields are blurred, and a submit function that will
   // be called when the form is submitted
   const navigate = useNavigate();
   const currUser = useContext(UserContext);
+  const [submissionErrors, setSubmissionErrors] = useState([]);
 
   const INITIAL_STATE = {
     username: "",
@@ -37,15 +40,34 @@ const LoginForm = ({ login }) => {
             .required("Required"),
         })}
         onSubmit={(values) => {
-          setTimeout(() => {
-            login(values);
-            navigate("/");
+          setTimeout(async () => {
+            const res = await login(values);
+            if (res.message.length > 0) {
+              res.message.forEach((m) => {
+                toast("error", m);
+                setSubmissionErrors((errors) => [...errors, m]);
+              });
+            } else {
+              navigate("/");
+            }
           }, 400);
         }}
       >
         <Form>
-          <MyTextInput label="Username" name="username" type="text" />
+          <MyTextInput
+            label="Username"
+            name="username"
+            type="text"
+            autoComplete="username"
+          />
           <MyPasswordInput label="Password" name="password" type="password" />
+          {submissionErrors
+            ? submissionErrors.map((e) => (
+                <div key={uuid()} className="error center">
+                  {e}
+                </div>
+              ))
+            : null}
           <button type="submit">Log In</button>
         </Form>
       </Formik>

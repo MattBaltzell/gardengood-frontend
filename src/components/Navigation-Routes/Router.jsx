@@ -8,7 +8,7 @@ import LoginForm from "../../auth/LoginForm";
 import UserContext from "../../auth/UserContext";
 import PrivateRoutes from "./PrivateRoutes";
 
-const Router = ({ signup, login, handleIsLoading, isLoading }) => {
+const Router = ({ signup, login, handleIsLoading, isLoading, toast }) => {
   const currUser = useContext(UserContext);
   return (
     <div className="container">
@@ -20,7 +20,7 @@ const Router = ({ signup, login, handleIsLoading, isLoading }) => {
               <Home />
             ) : (
               <>
-                <h1>Welcome back, {currUser.firstName}!</h1>
+                <h1>GardenGood Home Page!</h1>
               </>
             )
           }
@@ -40,8 +40,14 @@ const Router = ({ signup, login, handleIsLoading, isLoading }) => {
           <Route element={<Plant />} path="/plants/:id" />
         </Route>
 
-        <Route path="/signup" element={<SignupForm signup={signup} />} />
-        <Route path="/login" element={<LoginForm login={login} />} />
+        <Route
+          path="/signup"
+          element={<SignupForm signup={signup} toast={toast} />}
+        />
+        <Route
+          path="/login"
+          element={<LoginForm login={login} toast={toast} />}
+        />
 
         <Route
           path="*"
