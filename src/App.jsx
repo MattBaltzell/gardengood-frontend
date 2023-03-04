@@ -3,12 +3,15 @@ import "./App.css";
 import Router from "./components/Navigation-Routes/Router";
 import Navbar from "./components/Navigation-Routes/Navbar";
 import GardenGoodApi from "./api/api";
+import WeatherApi from "./api/weatherApi";
 import UserContext from "./auth/UserContext";
+import WeatherContext from "./WeatherContext";
 import jwt_decode from "jwt-decode";
 import { ToastContainer, toast } from "react-toastify";
 
 function App() {
   const [currUser, setCurrUser] = useState(null);
+  const [weather, setWeather] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("gardengood-token"));
   const [userWasUpdated, setUserWasUpdated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +29,8 @@ function App() {
           const user = await GardenGoodApi.getCurrentUser(username);
           setCurrUser(user);
           localStorage.setItem("gardengood-token", token);
+
+          console.log();
         } catch (error) {
           console.error(error);
         }
@@ -35,6 +40,28 @@ function App() {
 
     setUserWasUpdated(false);
   }, [token, userWasUpdated]);
+
+  useEffect(() => {
+    const getWeather = async () => {
+      try {
+        if (!currUser) return;
+        const weather = await WeatherApi.getCurrentWeather(currUser.zipCode);
+        setWeather(weather);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    if (process.env.NODE_ENV === "production") {
+      const checkWeather = setInterval(() => {
+        getWeather();
+        return () => {
+          clearInterval(checkWeather);
+        };
+      }, 600000);
+    }
+    getWeather();
+  }, [currUser]);
 
   const handleIsLoading = (bool) => {
     setIsLoading(bool);
@@ -94,29 +121,31 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={currUser}>
-        <Navbar logout={logout} />
+        <WeatherContext.Provider value={weather}>
+          <Navbar logout={logout} />
 
-        <ToastContainer
-          position="top-right"
-          autoClose={4000}
-          hideProgressBar
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
+          <ToastContainer
+            position="top-right"
+            autoClose={4000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
 
-        <Router
-          login={login}
-          signup={signup}
-          logout={logout}
-          handleIsLoading={handleIsLoading}
-          isLoading={isLoading}
-          toast={handleToast}
-        />
+          <Router
+            login={login}
+            signup={signup}
+            logout={logout}
+            handleIsLoading={handleIsLoading}
+            isLoading={isLoading}
+            toast={handleToast}
+          />
+        </WeatherContext.Provider>
       </UserContext.Provider>
     </div>
   );

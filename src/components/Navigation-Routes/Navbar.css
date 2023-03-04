@@ -27,6 +27,19 @@ a.Navbar__logo-link {
   display: flex;
 }
 
+.Navbar__weather {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+.Navbar__weather-condition {
+  align-items: center;
+  display: flex;
+}
+.Navbar__weather-icon {
+  width: 2.4rem;
+}
+
 .Navbar__links {
   display: flex;
   gap: 1.5rem;
