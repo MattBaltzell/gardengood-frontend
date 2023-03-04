@@ -20,9 +20,7 @@ const Home = () => {
           <Link to="/login">Login</Link>
           <Link to="/signup">Signup</Link>
         </p>
-      ) : (
-        <h2>Welcome back, {user.firstName}!</h2>
-      )}
+      ) : null}
     </main>
   );
 };

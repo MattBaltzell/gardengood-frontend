@@ -10,21 +10,11 @@ import PrivateRoutes from "./PrivateRoutes";
 
 const Router = ({ signup, login, handleIsLoading, isLoading, toast }) => {
   const currUser = useContext(UserContext);
+
   return (
     <div className="container">
       <Routes>
-        <Route
-          path="/"
-          element={
-            !currUser ? (
-              <Home />
-            ) : (
-              <>
-                <h1>GardenGood Home Page!</h1>
-              </>
-            )
-          }
-        />
+        <Route path="/" element={<Home />} />
 
         <Route element={<PrivateRoutes />}>
           <Route
