@@ -7,10 +7,10 @@ import SignupForm from "../../auth/SignupForm";
 import LoginForm from "../../auth/LoginForm";
 import UserContext from "../../auth/UserContext";
 import PrivateRoutes from "./PrivateRoutes";
+import { BallTriangle } from "react-loader-spinner";
 
 const Router = ({ signup, login, handleIsLoading, isLoading, toast }) => {
   const currUser = useContext(UserContext);
-
   return (
     <div className="container">
       <Routes>

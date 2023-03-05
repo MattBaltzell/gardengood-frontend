@@ -12,9 +12,13 @@ const Plant = () => {
 
   useEffect(() => {
     const getPlant = async () => {
-      const plant = await GardenGoodApi.getPlant(id);
-      await setPlant(plant);
-      setIsLoading(false);
+      try {
+        const plant = await GardenGoodApi.getPlant(id);
+        await setPlant(plant);
+        setIsLoading(false);
+      } catch (err) {
+        console.error(err);
+      }
     };
     getPlant();
   }, [id]);

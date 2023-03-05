@@ -9,16 +9,17 @@ const PlantSearch = ({ isLoading, handleIsLoading }) => {
   const [plantsList, setPlantsList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const search = (term) => {
-    setSearchTerm(term);
+  const search = async (term) => {
+    await setSearchTerm(term);
+    handleIsLoading(false);
   };
 
   useEffect(() => {
     async function getPlants(filterTerm) {
       try {
+        handleIsLoading(true);
         const plants = await GardenGoodApi.getAllPlants(filterTerm);
         await setPlantsList(plants);
-
         handleIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -44,6 +45,7 @@ const PlantSearch = ({ isLoading, handleIsLoading }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    handleIsLoading(true);
     search(formData.searchTerm.trim() || undefined);
   };
 

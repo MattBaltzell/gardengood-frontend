@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Router from "./components/Navigation-Routes/Router";
 import Navbar from "./components/Navigation-Routes/Navbar";
@@ -29,15 +29,12 @@ function App() {
           const user = await GardenGoodApi.getCurrentUser(username);
           setCurrUser(user);
           localStorage.setItem("gardengood-token", token);
-
-          console.log();
         } catch (error) {
           console.error(error);
         }
       }
     };
     getCurrUser();
-
     setUserWasUpdated(false);
   }, [token, userWasUpdated]);
 
@@ -63,9 +60,9 @@ function App() {
     getWeather();
   }, [currUser]);
 
-  const handleIsLoading = (bool) => {
+  const handleIsLoading = useCallback((bool) => {
     setIsLoading(bool);
-  };
+  }, []);
 
   const login = async ({ username, password }) => {
     try {
