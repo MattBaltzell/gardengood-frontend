@@ -26,11 +26,11 @@ const Navbar = ({ logout, menuIsOpen, handleMenuIsOpen }) => {
       }
     };
 
-    document.addEventListener("mousedown", checkIfClickedOutside);
+    document.addEventListener("mouseup", checkIfClickedOutside);
 
     return () => {
       // Cleanup the event listener
-      document.removeEventListener("mousedown", checkIfClickedOutside);
+      document.removeEventListener("mouseup", checkIfClickedOutside);
     };
   }, [menuIsOpen]);
 
@@ -99,7 +99,9 @@ const Navbar = ({ logout, menuIsOpen, handleMenuIsOpen }) => {
                     to={`/users/${user.username}`}
                     onClick={handleMenuIsOpen}
                   >
-                    Profile
+                    {`${
+                      user.username[0].toUpperCase() + user.username.slice(1)
+                    }'s Account`}
                   </NavLink>
                   <Link onClick={handleLogout}>Logout</Link>
                 </div>
