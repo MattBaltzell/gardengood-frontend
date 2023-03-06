@@ -29,7 +29,6 @@ class WeatherApi {
       const res = await this.request(
         `current.json?key=${API_KEY}&q=${zip}&aqi=no`
       );
-      console.log(res.current);
       return res.current;
     } catch (err) {
       console.error("WeatherAPI Error:", err.response);
