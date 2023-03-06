@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import GardenGoodApi from "../../api/api";
 import { BallTriangle } from "react-loader-spinner";
+import NotFound from "../../NotFound";
 import "./Plant.css";
 
 const Plant = () => {
-  const { id } = useParams();
-
   const [isLoading, setIsLoading] = useState(true);
   const [plant, setPlant] = useState({});
+  const { id } = useParams();
 
   useEffect(() => {
     const getPlant = async () => {
@@ -22,6 +22,11 @@ const Plant = () => {
     };
     getPlant();
   }, [id]);
+
+  console.log("PLANT", plant);
+  if (!plant.name) {
+    return <NotFound />;
+  }
 
   if (isLoading) {
     return (
@@ -40,7 +45,6 @@ const Plant = () => {
       </main>
     );
   }
-
   return (
     <>
       <Link to="/plants" className="breadcrumb">

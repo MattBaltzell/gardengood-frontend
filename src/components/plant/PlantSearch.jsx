@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import GardenGoodApi from "../../api/api";
 import "./Plant.css";
-import "../Form/Form.css";
+import "../form/Form.css";
 import PlantList from "./PlantList";
 import { BallTriangle } from "react-loader-spinner";
 

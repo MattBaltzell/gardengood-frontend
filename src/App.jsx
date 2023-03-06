@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
-import Router from "./components/Navigation-Routes/Router";
-import Navbar from "./components/Navigation-Routes/Navbar";
+import Router from "./components/routes-nav/Router";
+import Navbar from "./components/routes-nav/Navbar";
 import GardenGoodApi from "./api/api";
 import WeatherApi from "./api/weatherApi";
-import UserContext from "./auth/UserContext";
+import UserContext from "./components/auth/UserContext";
 import WeatherContext from "./WeatherContext";
 import jwt_decode from "jwt-decode";
 import { ToastContainer, toast } from "react-toastify";
@@ -14,11 +14,8 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("gardengood-token"));
   const [userWasUpdated, setUserWasUpdated] = useState(false);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
-  const handleToast = (type, msg) => {
-    console.log(toast[type](msg));
-  };
 
   useEffect(() => {
     const getCurrUser = async () => {
@@ -60,11 +57,19 @@ function App() {
     getWeather();
   }, [currUser]);
 
+  const handleToast = (type, msg) => {
+    console.log(toast[type](msg));
+  };
+
+  const handleMenuIsOpen = () => {
+    setMenuIsOpen(!menuIsOpen);
+  };
+
   const handleIsLoading = useCallback((bool) => {
     setIsLoading(bool);
   }, []);
 
-  const login = async ({ username, password }) => {
+  const handleLogin = async ({ username, password }) => {
     try {
       const token = await GardenGoodApi.login({ username, password });
       setToken(token);
@@ -76,7 +81,7 @@ function App() {
     }
   };
 
-  const signup = async ({
+  const handleSignup = async ({
     username,
     password,
     firstName,
@@ -102,7 +107,30 @@ function App() {
     }
   };
 
-  const logout = async () => {
+  const handleUpdate = async ({
+    username,
+    firstName,
+    lastName,
+    email,
+    zipCode,
+  }) => {
+    try {
+      const token = await GardenGoodApi.updateUser(username, {
+        firstName,
+        lastName,
+        email,
+        zipCode,
+      });
+      setToken(token);
+
+      const message = `Updated ${username}!`;
+      handleToast("success", message);
+    } catch (error) {
+      return { message: error };
+    }
+  };
+
+  const handleLogout = async () => {
     try {
       setToken(null);
       setCurrUser(null);
@@ -110,6 +138,7 @@ function App() {
       localStorage.setItem("gardengood-token", "");
       const message = `Successfully logged out.`;
       handleToast("success", message);
+      setMenuIsOpen(false);
     } catch (error) {
       return { message: error };
     }
@@ -119,7 +148,11 @@ function App() {
     <div className="App">
       <UserContext.Provider value={currUser}>
         <WeatherContext.Provider value={weather}>
-          <Navbar logout={logout} />
+          <Navbar
+            logout={handleLogout}
+            handleMenuIsOpen={handleMenuIsOpen}
+            menuIsOpen={menuIsOpen}
+          />
 
           <ToastContainer
             position="top-right"
@@ -135,9 +168,10 @@ function App() {
           />
 
           <Router
-            login={login}
-            signup={signup}
-            logout={logout}
+            login={handleLogin}
+            signup={handleSignup}
+            update={handleUpdate}
+            logout={handleLogout}
             handleIsLoading={handleIsLoading}
             isLoading={isLoading}
             toast={handleToast}

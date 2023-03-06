@@ -46,6 +46,16 @@ class GardenGoodApi {
     return res.user;
   }
 
+  /**
+   * Update a user by username.
+   * - data can include: username, password firstName, lastName, email, zipCode
+   * */
+
+  static async updateUser({ username, ...data }) {
+    const res = await this.request(`users/${username}`, data, "PATCH");
+    return res.user;
+  }
+
   //////////////////////////////////////////////////////
   // AUTH ROUTES
 

@@ -2,13 +2,22 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import PlantSearch from "../plant/PlantSearch";
 import Plant from "../plant/Plant";
+import User from "../profile/User";
 import Home from "../home/Home";
-import SignupForm from "../../auth/SignupForm";
-import LoginForm from "../../auth/LoginForm";
+import SignupForm from "../auth/SignupForm";
+import LoginForm from "../auth/LoginForm";
+import UpdateUserForm from "../profile/UpdateUserForm";
 
 import PrivateRoutes from "./PrivateRoutes";
 
-const Router = ({ signup, login, handleIsLoading, isLoading, toast }) => {
+const Router = ({
+  signup,
+  login,
+  update,
+  handleIsLoading,
+  isLoading,
+  toast,
+}) => {
   return (
     <div className="container">
       <Routes>
@@ -26,6 +35,8 @@ const Router = ({ signup, login, handleIsLoading, isLoading, toast }) => {
             exact
           />
           <Route element={<Plant />} path="/plants/:id" />
+          <Route element={<UpdateUserForm />} path="/users/update" exact />
+          <Route element={<User />} path="/users/:username" />
         </Route>
 
         <Route
@@ -34,7 +45,7 @@ const Router = ({ signup, login, handleIsLoading, isLoading, toast }) => {
         />
         <Route
           path="/login"
-          element={<LoginForm login={login} toast={toast} />}
+          element={<LoginForm update={update} toast={toast} />}
         />
 
         <Route

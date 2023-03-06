@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../auth/UserContext";
-import gardenGoodLogo from "../GardenGood-logo.svg";
+import gardenGoodLogo from "../../GardenGood-logo.svg";
 
 import "./Home.css";
 

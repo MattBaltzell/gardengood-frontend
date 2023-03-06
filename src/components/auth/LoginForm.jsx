@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate, Navigate } from "react-router-dom";
-import "../components/Form/Form.css";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { MyTextInput, MyPasswordInput } from "../components/Form/Forms";
+import { MyTextInput, MyPasswordInput } from "../form/Forms";
+import "../form/Form.css";
 import UserContext from "./UserContext";
 import { v4 as uuid } from "uuid";
 
-const SignupForm = ({ signup, toast }) => {
+const LoginForm = ({ login, toast }) => {
   // Pass the useFormik() hook initial form values, a validate function that will be called when
   // form values change or fields are blurred, and a submit function that will
   // be called when the form is submitted
@@ -18,10 +18,6 @@ const SignupForm = ({ signup, toast }) => {
   const INITIAL_STATE = {
     username: "",
     password: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    zipCode: "",
   };
 
   return currUser ? (
@@ -30,7 +26,7 @@ const SignupForm = ({ signup, toast }) => {
     <main className="Form">
       <div className="Home__bg"></div>
 
-      <h1>Sign Up</h1>
+      <h1>Login</h1>
 
       <Formik
         initialValues={{ ...INITIAL_STATE }}
@@ -41,22 +37,10 @@ const SignupForm = ({ signup, toast }) => {
           password: Yup.string()
             .min(8, "Must be 8 characters or more")
             .required("Required"),
-          firstName: Yup.string()
-            .max(25, "Must be 25 characters or less")
-            .required("Required"),
-          lastName: Yup.string()
-            .max(30, "Must be 30 characters or less")
-            .required("Required"),
-          email: Yup.string()
-            .email("Invalid email address")
-            .required("Required"),
-          zipCode: Yup.string()
-            .length(5, "Must be exactly 5 characters")
-            .required("Required"),
         })}
         onSubmit={(values) => {
           setTimeout(async () => {
-            const res = await signup(values);
+            const res = await login(values);
             if (res.message.length > 0) {
               res.message.forEach((m) => {
                 toast("error", m);
@@ -75,21 +59,7 @@ const SignupForm = ({ signup, toast }) => {
             type="text"
             autoComplete="username"
           />
-          <MyTextInput
-            label="Email"
-            name="email"
-            type="text"
-            autoComplete="email"
-          />
           <MyPasswordInput label="Password" name="password" type="password" />
-          <MyTextInput label="First Name" name="firstName" type="text" />
-          <MyTextInput label="Last Name" name="lastName" type="text" />
-          <MyTextInput
-            label="Zip Code"
-            name="zipCode"
-            type="text"
-            pattern="[0-9]{5}"
-          />
           {submissionErrors
             ? submissionErrors.map((e) => (
                 <div key={uuid()} className="error center">
@@ -97,14 +67,15 @@ const SignupForm = ({ signup, toast }) => {
                 </div>
               ))
             : null}
-          <button type="submit">Create Account</button>
+          <button type="submit">Log In</button>
         </Form>
       </Formik>
+
       <p>
-        Already have an account? <Link to="/login">Log in</Link>
+        No Account? <Link to="/signup">Create one</Link>
       </p>
     </main>
   );
 };
 
-export default SignupForm;
+export default LoginForm;
