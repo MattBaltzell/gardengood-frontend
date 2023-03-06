@@ -35,8 +35,12 @@ const Router = ({
             exact
           />
           <Route element={<Plant />} path="/plants/:id" />
-          <Route element={<UpdateUserForm />} path="/users/update" exact />
-          <Route element={<User />} path="/users/:username" />
+          <Route
+            element={<UpdateUserForm update={update} />}
+            path="/users/:username/update"
+            exact
+          />
+          <Route element={<User />} path="/users/:username" exact />
         </Route>
 
         <Route
@@ -45,7 +49,7 @@ const Router = ({
         />
         <Route
           path="/login"
-          element={<LoginForm update={update} toast={toast} />}
+          element={<LoginForm login={login} toast={toast} />}
         />
 
         <Route
