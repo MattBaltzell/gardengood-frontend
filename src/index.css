@@ -97,6 +97,12 @@ code {
     monospace;
 }
 
+h1 {
+  color: #fff;
+  font-weight: 200;
+  font-size: 2.8rem;
+}
+
 a {
   text-decoration: none;
   color: var(--color-primary-400);
@@ -114,4 +120,8 @@ hr {
   border: none;
   border-top: 1px solid var(--color-neutral-500);
   width: 100%;
+}
+
+.Form input.text-input:disabled {
+  color: var(--color-neutral-300);
 }
