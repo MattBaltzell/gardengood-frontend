@@ -1,16 +1,17 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import "../form/Form.css";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { MyTextInput, MyPasswordInput } from "../form/Forms";
+import { MyTextInput } from "../form/Forms";
 import UserContext from "../auth/UserContext";
 import { v4 as uuid } from "uuid";
 
-const SignupForm = ({ update, toast }) => {
+const UserUpdateForm = ({ update, toast }) => {
   // Pass the useFormik() hook initial form values, a validate function that will be called when
   // form values change or fields are blurred, and a submit function that will
   // be called when the form is submitted
+
   const navigate = useNavigate();
   const currUser = useContext(UserContext);
   const [submissionErrors, setSubmissionErrors] = useState([]);
@@ -48,18 +49,26 @@ const SignupForm = ({ update, toast }) => {
           setTimeout(async () => {
             const username = currUser.username;
             const res = await update({ username, ...values });
-            if (res.message.length > 0) {
+            if (res.message) {
               res.message.forEach((m) => {
                 toast("error", m);
                 setSubmissionErrors((errors) => [...errors, m]);
               });
             } else {
-              navigate("/");
+              return navigate(`/users/${username}`);
             }
           }, 400);
         }}
       >
         <Form>
+          <MyTextInput
+            label="User Name"
+            name="username"
+            type="text"
+            disabled
+            value={currUser.username}
+          />
+
           <MyTextInput
             label="Email"
             name="email"
@@ -88,4 +97,4 @@ const SignupForm = ({ update, toast }) => {
   );
 };
 
-export default SignupForm;
+export default UserUpdateForm;

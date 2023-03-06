@@ -58,7 +58,7 @@ function App() {
   }, [currUser]);
 
   const handleToast = (type, msg) => {
-    console.log(toast[type](msg));
+    return toast[type](msg);
   };
 
   const handleMenuIsOpen = () => {
@@ -107,24 +107,13 @@ function App() {
     }
   };
 
-  const handleUpdate = async ({
-    username,
-    firstName,
-    lastName,
-    email,
-    zipCode,
-  }) => {
+  const handleUpdate = async (data) => {
     try {
-      const token = await GardenGoodApi.updateUser(username, {
-        firstName,
-        lastName,
-        email,
-        zipCode,
-      });
-      setToken(token);
-
-      const message = `Updated ${username}!`;
+      await GardenGoodApi.updateUser(data);
+      setUserWasUpdated(true);
+      const message = `Updated ${data.username}!`;
       handleToast("success", message);
+      return message;
     } catch (error) {
       return { message: error };
     }
