@@ -61,7 +61,7 @@ const Plant = () => {
             <img className="Plant__img" alt={plant.name} src={plant.imgUrl} />
             <div className="Plant__info-group">
               <div className="Plant__info">
-                <h4>Species:</h4>
+                <h4>Species</h4>
                 <p>{plant.species}</p>
               </div>
               <div className="Plant__info">
