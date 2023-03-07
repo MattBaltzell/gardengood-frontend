@@ -91,7 +91,7 @@ const Navbar = ({ logout, menuIsOpen, handleMenuIsOpen }) => {
               ) : (
                 <div className="Navbar__links">
                   <NavLink to="/plants" onClick={handleMenuIsOpen}>
-                    Plants
+                    Plant Directory
                   </NavLink>
                   <NavLink
                     to={`/users/${user.username}`}

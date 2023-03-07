@@ -51,7 +51,7 @@ const PlantSearch = ({ isLoading, handleIsLoading }) => {
 
   return (
     <main className="Plant-search">
-      <h1>Find a Plant</h1>
+      <h1>Plant Directory</h1>
       <form
         autoComplete="off"
         className="Plant-search__form"
