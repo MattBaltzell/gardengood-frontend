@@ -44,29 +44,27 @@ const Navbar = ({ logout, menuIsOpen, handleMenuIsOpen }) => {
       <div className="Navbar">
         <div className="Navbar__container">
           <nav>
-            <div className="Navbar__constants">
-              <NavLink to="/" className="Navbar__logo-link">
-                <img
-                  className="Navbar__logo"
-                  src={gardenGoodLogoMark}
-                  alt="GardenGood"
-                />
-              </NavLink>
+            <NavLink to="/" className="Navbar__logo-link">
+              <img
+                className="Navbar__logo"
+                src={gardenGoodLogoMark}
+                alt="GardenGood"
+              />
+            </NavLink>
 
-              {user && weather ? (
-                <div className="Navbar__weather">
-                  <div className="Navbar__weather-condition">
-                    <img
-                      className="Navbar__weather-icon"
-                      src={weather.condition.icon}
-                      alt="Weather condition"
-                    />
-                    <p>{weather.condition.text}</p>
-                  </div>
-                  <p>{Math.round(weather.temp_f)} F°</p>
+            {user && weather ? (
+              <div className="Navbar__weather">
+                <div className="Navbar__weather-condition">
+                  <img
+                    className="Navbar__weather-icon"
+                    src={weather.condition.icon}
+                    alt="Weather condition"
+                  />
+                  <p>{weather.condition.text}</p>
                 </div>
-              ) : null}
-            </div>
+                <p>{Math.round(weather.temp_f)} F°</p>
+              </div>
+            ) : null}
 
             <div
               onClick={handleMenuIsOpen}

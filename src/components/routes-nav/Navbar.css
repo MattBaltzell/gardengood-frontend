@@ -1,24 +1,22 @@
 .Navbar {
-  background-color: var(--color-neutral-600);
-  z-index: 1000;
-
-  padding: 1.2rem 1rem;
-  width: 100%;
   display: flex;
   justify-content: center;
+  background-color: var(--color-neutral-600);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 1.2rem 1rem;
+  width: 100%;
+  z-index: 1000;
 }
 
 .Navbar__container {
   width: 100%;
-  max-width: 1200px;
 }
 
 .Navbar__container nav {
   display: flex;
-  gap: 2rem;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
   position: relative;
 }
 
@@ -37,31 +35,31 @@ a.Navbar__logo-link {
 }
 
 .Navbar__weather {
-  align-items: center;
   display: flex;
+  align-items: center;
   gap: 1rem;
 }
 .Navbar__weather-condition {
-  align-items: center;
   display: flex;
+  align-items: center;
 }
 .Navbar__weather-icon {
   width: 2.4rem;
 }
 
 .Navbar__menu-icon {
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  cursor: pointer;
 }
 
 .Navbar__menu-icon div {
+  background-color: var(--color-neutral-200);
+  transition: all 0.2s ease-out;
   height: 3px;
   width: 2rem;
-  background-color: var(--color-neutral-200);
   z-index: 1000;
-  transition: all 0.2s ease-out;
 }
 
 .Navbar__menu-icon.active > div:first-child {
@@ -84,11 +82,12 @@ a.Navbar__logo-link {
   top: 76.77px;
   right: -100vw;
   padding: 2rem;
-  border-radius: 0 0 0 4px;
-  min-width: 50vw;
   background-color: var(--color-primary-400);
-  transition: all 0.3s ease-in-out;
+  border-radius: 0 0 0 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  max-width: 16rem;
 }
 
 .Navbar__menu.active {
@@ -96,26 +95,24 @@ a.Navbar__logo-link {
 }
 
 .Navbar__links {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
   font-size: 1.2rem;
-  gap: 1rem;
+  display: flex;
   align-items: flex-start;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
   white-space: nowrap;
 }
 
 .Navbar__links a {
   text-decoration: none;
   color: var(--color-neutral-100);
-  transition: all 0.3s ease-in-out;
   position: relative;
+  transition: all 0.3s ease-in-out;
 }
 
 .Navbar__links a::after {
   content: "";
-  height: 3px;
-  width: 0;
   opacity: 0;
   margin: 0 auto;
   background-color: var(--color-neutral-700);
@@ -123,6 +120,8 @@ a.Navbar__logo-link {
   left: 0;
   right: 0;
   transition: all 0.3s ease-in-out;
+  height: 3px;
+  width: 0;
 }
 
 .Navbar__links a.active {
@@ -130,9 +129,9 @@ a.Navbar__logo-link {
 }
 
 .Navbar__links a.active::after {
-  width: 100%;
   opacity: 1;
   position: absolute;
+  width: 100%;
 }
 
 .Navbar__links a:hover {
@@ -140,10 +139,10 @@ a.Navbar__logo-link {
 }
 
 .Navbar__links a:hover::after {
-  width: 100%;
-  transform: translateX(0);
   opacity: 1;
   position: absolute;
+  transform: translateX(0);
+  width: 100%;
 }
 
 @media screen and (min-width: 800px) {
@@ -151,37 +150,7 @@ a.Navbar__logo-link {
     padding: 1.2rem 3rem;
   }
 
-  /* .Navbar__menu {
-    display: flex;
-    align-items: center;
-    justify-content: stretch;
-    position: static;
-    padding: 0;
-    top: auto;
-    right: auto;
-    background-color: transparent;
-    min-width: auto;
-    box-shadow: none;
+  .Navbar__menu {
+    max-width: 20rem;
   }
-  .Navbar__links {
-    flex-direction: row;
-    gap: 2.5rem;
-    font-size: 1rem;
-  }
-
-  .Navbar__menu-icon {
-    display: none;
-  }
-
-  .Navbar__links a::after {
-    background-color: var(--color-primary-400);
-  }
-
-  .Navbar__links a.active {
-    color: var(--color-neutral-100);
-  }
-
-  .Navbar__links a:hover {
-    color: var(--color-primary-200);
-  } */
 }
