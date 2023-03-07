@@ -19,33 +19,34 @@ const User = () => {
     <>
       <main className="User">
         <div className="User__info-container">
-          <div className="User__info-header">
-            <h1>Account Info</h1>
+          <h1>Account Info</h1>
+
+          <div className="User__info-container-section">
             <div className="User__info-group">
-              <h3>Username</h3>
+              <h4>Username</h4>
               <p>{currUser.username}</p>
             </div>
             <div className="User__info-group">
-              <h3>Email</h3>
+              <h4>Email</h4>
               <p>{currUser.email}</p>
             </div>
             <div className="User__info-group">
-              <h3>First Name</h3>
+              <h4>First Name</h4>
               <p>{currUser.firstName}</p>
             </div>
             <div className="User__info-group">
-              <h3>Last Name</h3>
+              <h4>Last Name</h4>
               <p>{currUser.lastName}</p>
             </div>
             <div className="User__info-group">
-              <h3>Zip Code</h3>
+              <h4>Zip Code</h4>
               <p>{currUser.zipCode}</p>
             </div>
-
-            <Link to={`/users/${currUser.username}/update`}>
-              Update account info
-            </Link>
           </div>
+
+          <Link to={`/users/${currUser.username}/update`}>
+            Update account info
+          </Link>
         </div>
       </main>
     </>
