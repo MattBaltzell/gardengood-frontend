@@ -23,7 +23,6 @@ const Plant = () => {
     getPlant();
   }, [id]);
 
-  console.log("PLANT", plant);
   if (!plant.name) {
     return <NotFound />;
   }
