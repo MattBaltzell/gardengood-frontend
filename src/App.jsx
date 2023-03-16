@@ -77,7 +77,9 @@ function App() {
       handleToast("success", message);
       return { message: message };
     } catch (error) {
-      return { message: error };
+      const message = `Invalid username/password!`;
+      handleToast("error", message);
+      return { error: { message: message } };
     }
   };
 

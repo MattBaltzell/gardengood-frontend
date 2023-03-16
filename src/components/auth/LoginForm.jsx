@@ -39,15 +39,11 @@ const LoginForm = ({ login, toast }) => {
             .required("Required"),
         })}
         onSubmit={(values) => {
+          setSubmissionErrors([]);
           setTimeout(async () => {
             const res = await login(values);
-            if (res.message.length > 0) {
-              res.message.forEach((m) => {
-                toast("error", m);
-                setSubmissionErrors((errors) => [...errors, m]);
-              });
-            } else {
-              navigate("/");
+            if (res.error) {
+              setSubmissionErrors((errors) => [...errors, res.error.message]);
             }
           }, 400);
         }}
