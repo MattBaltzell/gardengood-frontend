@@ -12,11 +12,14 @@ const user = {
 };
 describe("Home component tests", function () {
   it("renders without crashing", function () {
-    render(
+    const { getByText, getByAltText } = render(
       <MemoryRouter>
         <Home></Home>
       </MemoryRouter>
     );
+    expect(getByText("Login")).toBeInTheDocument();
+    expect(getByText("Signup")).toBeInTheDocument();
+    expect(getByAltText("GardenGood")).toBeInTheDocument();
   });
 
   it("matches snapshot", function () {
