@@ -1,25 +1,47 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import Home from "./Home";
 import UserContext from "../auth/UserContext";
 
 const user = {
   username: "testuser",
-  first_name: "firstname",
-  last_name: "lastname",
+  firstName: "firstname",
+  lastName: "lastname",
   email: "test@test.com",
+  zipCode: "36830",
 };
 describe("Home component tests", function () {
   it("renders without crashing", function () {
-    const { getByText, getByAltText } = render(
+    render(
       <MemoryRouter>
         <Home></Home>
       </MemoryRouter>
     );
-    expect(getByText("Login")).toBeInTheDocument();
-    expect(getByText("Signup")).toBeInTheDocument();
-    expect(getByAltText("GardenGood")).toBeInTheDocument();
+  });
+
+  it("renders without auth buttons anon", function () {
+    render(
+      <MemoryRouter>
+        <Home></Home>
+      </MemoryRouter>
+    );
+    expect(screen.getByText("Login")).toBeInTheDocument();
+    expect(screen.getByText("Signup")).toBeInTheDocument();
+    expect(screen.getByAltText("GardenGood")).toBeInTheDocument();
+  });
+
+  it("renders without auth buttons when logged in", function () {
+    render(
+      <MemoryRouter>
+        <UserContext.Provider value={user}>
+          <Home />
+        </UserContext.Provider>
+      </MemoryRouter>
+    );
+    expect(screen.queryByText("Login")).not.toBeInTheDocument();
+    expect(screen.queryByText("Signup")).not.toBeInTheDocument();
+    expect(screen.getByAltText("GardenGood")).toBeInTheDocument();
   });
 
   it("matches snapshot", function () {
