@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import LoginForm from "./LoginForm";
 
@@ -22,5 +22,15 @@ describe("LoginForm component tests", function () {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("submits");
+  it("displays 'Required' error when submitted with no input value", async function () {
+    render(
+      <MemoryRouter>
+        <LoginForm></LoginForm>
+      </MemoryRouter>
+    );
+    const buttonEl = screen.getByRole("button");
+    fireEvent.click(buttonEl);
+    const requiredErrors = await screen.findAllByText("Required");
+    expect(requiredErrors.length).toEqual(2);
+  });
 });
