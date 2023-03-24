@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlantList component tests matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Plant-list"
+  >
+    <div
+      class="Plant-list__thumbnail"
+    >
+      <img
+        alt="Plant 1"
+        class="Plant-list__img"
+        src="http://img1url.jpg"
+      />
+      <h3
+        class="Plant-list__name"
+      >
+        Plant 1
+      </h3>
+    </div>
+    <div
+      class="Plant-list__thumbnail"
+    >
+      <img
+        alt="Plant 2"
+        class="Plant-list__img"
+        src="http://img2url.jpg"
+      />
+      <h3
+        class="Plant-list__name"
+      >
+        Plant 2
+      </h3>
+    </div>
+  </div>
+</DocumentFragment>
+`;

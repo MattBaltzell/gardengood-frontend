@@ -1,8 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
-import Plant from "./Plant";
-import App from "../../App";
+import PlantList from "./PlantList";
 import UserContext from "../auth/UserContext";
 
 const user = {
@@ -12,11 +11,16 @@ const user = {
   email: "test@test.com",
 };
 
-describe("Plant component tests", function () {
+const plants = [
+  { id: 1, name: "Plant 1", imgUrl: "http://img1url.jpg" },
+  { id: 2, name: "Plant 2", imgUrl: "http://img2url.jpg" },
+];
+
+describe("PlantList component tests", function () {
   it("renders without crashing", function () {
     render(
       <MemoryRouter>
-        <Plant />
+        <PlantList plants={plants} />
       </MemoryRouter>
     );
   });
@@ -25,21 +29,22 @@ describe("Plant component tests", function () {
     const { asFragment } = render(
       <MemoryRouter>
         <UserContext.Provider value={user}>
-          <Plant />
+          <PlantList plants={plants} />
         </UserContext.Provider>
       </MemoryRouter>
     );
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it("matches snapshot when logged out", function () {
-    const { asFragment } = render(
+  it("renders list of plants", function () {
+    render(
       <MemoryRouter>
-        <UserContext.Provider value={null}>
-          <Plant />
+        <UserContext.Provider value={user}>
+          <PlantList plants={plants} />
         </UserContext.Provider>
       </MemoryRouter>
     );
-    expect(asFragment()).toMatchSnapshot();
+    expect(screen.getByText("Plant 1")).toBeInTheDocument();
+    expect(screen.getByAltText("Plant 2")).toBeInTheDocument();
   });
 });

@@ -15,10 +15,10 @@ const Plant = () => {
       try {
         const plant = await GardenGoodApi.getPlant(id);
         await setPlant(plant);
-        setIsLoading(false);
       } catch (err) {
         console.error(err);
       }
+      setIsLoading(false);
     };
     getPlant();
   }, [id]);

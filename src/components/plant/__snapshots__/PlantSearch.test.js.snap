@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlantSearch component tests matches snapshot 1`] = `
+<DocumentFragment>
+  <main
+    class="Plant-search"
+  >
+    <h1>
+      Plant Directory
+    </h1>
+    <form
+      autocomplete="off"
+      class="Plant-search__form"
+    >
+      <input
+        autocomplete="false"
+        name="hidden"
+        style="display: none;"
+        type="text"
+      />
+      <input
+        class="Form__input--text"
+        name="searchTerm"
+        placeholder="Start typing plant name"
+        type="text"
+        value=""
+      />
+    </form>
+    <p>
+      No plants found.
+    </p>
+  </main>
+</DocumentFragment>
+`;
+
+exports[`PlantSearch component tests matches snapshot when logged out 1`] = `
+<DocumentFragment>
+  <main
+    class="Plant-search"
+  >
+    <h1>
+      Plant Directory
+    </h1>
+    <form
+      autocomplete="off"
+      class="Plant-search__form"
+    >
+      <input
+        autocomplete="false"
+        name="hidden"
+        style="display: none;"
+        type="text"
+      />
+      <input
+        class="Form__input--text"
+        name="searchTerm"
+        placeholder="Start typing plant name"
+        type="text"
+        value=""
+      />
+    </form>
+    <p>
+      No plants found.
+    </p>
+  </main>
+</DocumentFragment>
+`;
