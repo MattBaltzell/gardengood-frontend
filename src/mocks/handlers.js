@@ -21,8 +21,65 @@ export const handlers = [
     );
   }),
   rest.patch(`${BASE_URL}/users/:username`, null),
+
   rest.post(`${BASE_URL}/auth/token`, null),
+
   rest.post(`${BASE_URL}/auth/register`, null),
-  rest.get(`${BASE_URL}/plants`, null),
-  rest.get(`${BASE_URL}/plants/:id`, null),
+
+  rest.get(`${BASE_URL}/plants`, (req, res, ctx) => {
+    return res(
+      ctx.json({
+        plants: [
+          {
+            id: 1,
+            name: "Test Plant 1",
+            species: "Test Plant 1 Species",
+            imgUrl: "testplant1img",
+            isPerrenial: true,
+            description: "Description 1",
+            daysToMaturityMin: 1095,
+            daysToMaturityMax: 1460,
+            sunlight: ["Full Sun", "Partial Sun"],
+            growingSeasons: ["Spring"],
+          },
+          {
+            id: 2,
+            name: "Test Plant 2",
+            species: "Test Plant 2 Species",
+            imgUrl: "testplant1img",
+            isPerrenial: false,
+            description: "Description 2",
+            daysToMaturityMin: 90,
+            daysToMaturityMax: 120,
+            sunlight: ["Full Sun"],
+            growingSeasons: ["Spring"],
+          },
+        ],
+      })
+    );
+  }),
+
+  rest.get(`${BASE_URL}/plants/:id`, (req, res, ctx) => {
+    return res(
+      ctx.json({
+        plant: {
+          id: req.params.id,
+          name: "Test Plant 1",
+          species: "Test Plant 1 Species",
+          imgUrl: "testplant1img",
+          isPerrenial: true,
+          description: "Description 1",
+          daysToMaturityMin: 1095,
+          daysToMaturityMax: 1460,
+          sunlight: ["Full Sun", "Partial Sun"],
+          growingSeasons: ["Spring"],
+          instructions: {
+            planting: "Planting instructions 1",
+            pruning: "Pruning instructions 1",
+            watering: "Watering instructions 1",
+          },
+        },
+      })
+    );
+  }),
 ];
