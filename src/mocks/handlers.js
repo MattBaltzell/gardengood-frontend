@@ -26,6 +26,8 @@ export const handlers = [
 
   rest.post(`${BASE_URL}/auth/register`, null),
 
+  // Handles a GET /plants request
+
   rest.get(`${BASE_URL}/plants`, (req, res, ctx) => {
     return res(
       ctx.json({
@@ -58,6 +60,8 @@ export const handlers = [
       })
     );
   }),
+
+  // Handles a GET /plants/:id request
 
   rest.get(`${BASE_URL}/plants/:id`, (req, res, ctx) => {
     return res(
