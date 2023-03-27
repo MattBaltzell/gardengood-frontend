@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User component tests matches snapshot 1`] = `
+<DocumentFragment>
+  <a
+    class="breadcrumb"
+    href="/users/testuser"
+  >
+    Back to Testuser's account
+  </a>
+  <main
+    class="Form"
+  >
+    <h1>
+      Update Account
+    </h1>
+    <form
+      action="#"
+    >
+      <label
+        for="username"
+      >
+        User Name
+      </label>
+      <input
+        class="text-input"
+        disabled=""
+        name="username"
+        type="text"
+        value="testuser"
+      />
+      <label
+        for="email"
+      >
+        Email
+      </label>
+      <input
+        autocomplete="email"
+        class="text-input"
+        name="email"
+        type="text"
+        value="test@test.com"
+      />
+      <label
+        for="firstName"
+      >
+        First Name
+      </label>
+      <input
+        class="text-input"
+        name="firstName"
+        type="text"
+        value="firstname"
+      />
+      <label
+        for="lastName"
+      >
+        Last Name
+      </label>
+      <input
+        class="text-input"
+        name="lastName"
+        type="text"
+        value="lastname"
+      />
+      <label
+        for="zipCode"
+      >
+        Zip Code
+      </label>
+      <input
+        class="text-input"
+        name="zipCode"
+        pattern="[0-9]{5}"
+        type="text"
+        value="36830"
+      />
+      <button
+        type="submit"
+      >
+        Update Account
+      </button>
+    </form>
+  </main>
+</DocumentFragment>
+`;
