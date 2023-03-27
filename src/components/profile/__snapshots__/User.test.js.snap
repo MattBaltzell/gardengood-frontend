@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User component tests matches snapshot 1`] = `
+<DocumentFragment>
+  <main
+    class="Unauth"
+  >
+    <h1>
+      Not so fast!
+    </h1>
+    <h3>
+      You do not have permission to view that page!
+    </h3>
+    <a
+      href="/"
+    >
+      Return to home page.
+    </a>
+  </main>
+</DocumentFragment>
+`;
