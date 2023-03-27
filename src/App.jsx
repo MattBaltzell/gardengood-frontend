@@ -15,7 +15,6 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem("gardengood-token"));
   const [userWasUpdated, setUserWasUpdated] = useState(false);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getCurrUser = async () => {
@@ -64,10 +63,6 @@ function App() {
   const handleMenuIsOpen = () => {
     setMenuIsOpen(!menuIsOpen);
   };
-
-  const handleIsLoading = useCallback((bool) => {
-    setIsLoading(bool);
-  }, []);
 
   const handleLogin = async ({ username, password }) => {
     try {
@@ -163,8 +158,6 @@ function App() {
             signup={handleSignup}
             update={handleUpdate}
             logout={handleLogout}
-            handleIsLoading={handleIsLoading}
-            isLoading={isLoading}
             toast={handleToast}
           />
         </WeatherContext.Provider>

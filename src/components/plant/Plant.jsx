@@ -4,9 +4,10 @@ import GardenGoodApi from "../../api/api";
 import { BallTriangle } from "react-loader-spinner";
 import NotFound from "../../NotFound";
 import "./Plant.css";
+import useLoading from "../../hooks/useLoading";
 
 const Plant = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, handleIsLoading] = useLoading(true);
   const [plant, setPlant] = useState({});
   const { id } = useParams();
 
@@ -18,7 +19,7 @@ const Plant = () => {
       } catch (err) {
         console.error(err);
       }
-      setIsLoading(false);
+      handleIsLoading(false);
     };
     getPlant();
   }, [id]);

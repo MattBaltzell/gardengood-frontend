@@ -4,12 +4,15 @@ import "./Plant.css";
 import "../form/Form.css";
 import PlantList from "./PlantList";
 import { BallTriangle } from "react-loader-spinner";
+import useLoading from "../../hooks/useLoading";
 
-const PlantSearch = ({ isLoading, handleIsLoading }) => {
+const PlantSearch = () => {
   const [plantsList, setPlantsList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, handleIsLoading] = useLoading();
 
   const search = async (term) => {
+    handleIsLoading(true);
     await setSearchTerm(term);
     handleIsLoading(false);
   };
@@ -26,7 +29,7 @@ const PlantSearch = ({ isLoading, handleIsLoading }) => {
       }
     }
     getPlants(searchTerm);
-  }, [searchTerm, handleIsLoading]);
+  }, [searchTerm]);
 
   const INITIAL_STATE = { searchTerm: "" };
   const [formData, setFormData] = useState(INITIAL_STATE);
