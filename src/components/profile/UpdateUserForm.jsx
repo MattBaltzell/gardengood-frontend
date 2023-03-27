@@ -91,7 +91,11 @@ const UserUpdateForm = ({ update, toast }) => {
             />
             {submissionErrors
               ? submissionErrors.map((e) => (
-                  <div key={uuid()} className="error center">
+                  <div
+                    key={uuid()}
+                    className="error center"
+                    data-testid="required-error"
+                  >
                     {e}
                   </div>
                 ))
