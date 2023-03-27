@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignupForm component tests matches snapshot 1`] = `
+<DocumentFragment>
+  <main
+    class="Form"
+  >
+    <div
+      class="Home__bg"
+    />
+    <h1>
+      Sign Up
+    </h1>
+    <form
+      action="#"
+    >
+      <label
+        for="username"
+      >
+        Username
+      </label>
+      <input
+        autocomplete="username"
+        class="text-input"
+        name="username"
+        type="text"
+        value=""
+      />
+      <label
+        for="email"
+      >
+        Email
+      </label>
+      <input
+        autocomplete="email"
+        class="text-input"
+        name="email"
+        type="text"
+        value=""
+      />
+      <label
+        for="password"
+      >
+        Password
+      </label>
+      <input
+        class="password-input"
+        name="password"
+        type="password"
+        value=""
+      />
+      <label
+        for="firstName"
+      >
+        First Name
+      </label>
+      <input
+        class="text-input"
+        name="firstName"
+        type="text"
+        value=""
+      />
+      <label
+        for="lastName"
+      >
+        Last Name
+      </label>
+      <input
+        class="text-input"
+        name="lastName"
+        type="text"
+        value=""
+      />
+      <label
+        for="zipCode"
+      >
+        Zip Code
+      </label>
+      <input
+        class="text-input"
+        name="zipCode"
+        pattern="[0-9]{5}"
+        type="text"
+        value=""
+      />
+      <button
+        type="submit"
+      >
+        Create Account
+      </button>
+    </form>
+    <p>
+      Already have an account? 
+      <a
+        href="/login"
+      >
+        Log in
+      </a>
+    </p>
+  </main>
+</DocumentFragment>
+`;
