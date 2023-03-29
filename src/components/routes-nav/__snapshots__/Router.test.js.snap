@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Router component tests matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <main
+      class="Home"
+    >
+      <div
+        class="Home__bg"
+      />
+      <img
+        alt="GardenGood"
+        class="Home__logo"
+        src="GardenGood-logo.svg"
+      />
+      <div
+        class="Home__intro-text"
+      >
+        <h1>
+          Helping gardeners plan, plant, and tend their crops for a thriving garden.
+        </h1>
+        <h2>
+          It's time for you to garden GOOD.
+        </h2>
+      </div>
+    </main>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Router component tests matches snapshot when logged out 1`] = `
+<DocumentFragment>
+  <div
+    class="container"
+  >
+    <main
+      class="Home"
+    >
+      <div
+        class="Home__bg"
+      />
+      <img
+        alt="GardenGood"
+        class="Home__logo"
+        src="GardenGood-logo.svg"
+      />
+      <div
+        class="Home__intro-text"
+      >
+        <h1>
+          Helping gardeners plan, plant, and tend their crops for a thriving garden.
+        </h1>
+        <h2>
+          It's time for you to garden GOOD.
+        </h2>
+      </div>
+      <p>
+        <a
+          href="/login"
+        >
+          Login
+        </a>
+        <a
+          href="/signup"
+        >
+          Signup
+        </a>
+      </p>
+    </main>
+  </div>
+</DocumentFragment>
+`;
