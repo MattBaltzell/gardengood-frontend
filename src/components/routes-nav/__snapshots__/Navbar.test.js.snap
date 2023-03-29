@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar component tests matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Navbar"
+  >
+    <div
+      class="Navbar__container"
+    >
+      <nav>
+        <a
+          aria-current="page"
+          class="Navbar__logo-link active"
+          href="/"
+        >
+          <img
+            alt="GardenGood"
+            class="Navbar__logo"
+            src="GardenGood-logomark.svg"
+          />
+        </a>
+        <div
+          class="Navbar__menu-icon "
+          data-testid="hamburger-icon"
+        >
+          <div
+            class="Navbar__menu-icon-bar"
+          />
+          <div
+            class="Navbar__menu-icon-bar"
+          />
+          <div
+            class="Navbar__menu-icon-bar"
+          />
+        </div>
+        <div
+          class="Navbar__menu "
+          data-testid="nav-menu"
+        >
+          <div
+            class="Navbar__links"
+          >
+            <a
+              class=""
+              href="/plants"
+            >
+              Plant Directory
+            </a>
+            <a
+              class=""
+              href="/users/testuser"
+            >
+              Testuser's Account
+            </a>
+            <a
+              href="/"
+            >
+              Logout
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Navbar component tests matches snapshot when logged out 1`] = `
+<DocumentFragment>
+  <div
+    class="Navbar"
+  >
+    <div
+      class="Navbar__container"
+    >
+      <nav>
+        <a
+          aria-current="page"
+          class="Navbar__logo-link active"
+          href="/"
+        >
+          <img
+            alt="GardenGood"
+            class="Navbar__logo"
+            src="GardenGood-logomark.svg"
+          />
+        </a>
+        <div
+          class="Navbar__menu-icon "
+          data-testid="hamburger-icon"
+        >
+          <div
+            class="Navbar__menu-icon-bar"
+          />
+          <div
+            class="Navbar__menu-icon-bar"
+          />
+          <div
+            class="Navbar__menu-icon-bar"
+          />
+        </div>
+        <div
+          class="Navbar__menu "
+          data-testid="nav-menu"
+        >
+          <div
+            class="Navbar__links"
+          >
+            <a
+              class=""
+              href="/login"
+            >
+              Login
+            </a>
+            <a
+              class=""
+              href="/Signup"
+            >
+              Signup
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</DocumentFragment>
+`;

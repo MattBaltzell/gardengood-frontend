@@ -69,6 +69,7 @@ const Navbar = ({ logout, menuIsOpen, handleMenuIsOpen }) => {
             <div
               onClick={handleMenuIsOpen}
               className={`Navbar__menu-icon ${menuIsOpen ? "active" : ""}`}
+              data-testid="hamburger-icon"
             >
               <div className="Navbar__menu-icon-bar"></div>
               <div className="Navbar__menu-icon-bar"></div>
@@ -78,6 +79,7 @@ const Navbar = ({ logout, menuIsOpen, handleMenuIsOpen }) => {
             <div
               ref={menuRef}
               className={`Navbar__menu ${menuIsOpen ? "active" : ""}`}
+              data-testid="nav-menu"
             >
               {!user ? (
                 <div className="Navbar__links">
