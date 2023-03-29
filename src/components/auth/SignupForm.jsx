@@ -55,15 +55,11 @@ const SignupForm = ({ signup, toast }) => {
             .required("Required"),
         })}
         onSubmit={(values) => {
+          setSubmissionErrors([]);
           setTimeout(async () => {
             const res = await signup(values);
-            if (res.message.length > 0) {
-              res.message.forEach((m) => {
-                toast("error", m);
-                setSubmissionErrors((errors) => [...errors, m]);
-              });
-            } else {
-              navigate("/");
+            if (res.message) {
+              setSubmissionErrors((errors) => [...errors, res.message]);
             }
           }, 400);
         }}

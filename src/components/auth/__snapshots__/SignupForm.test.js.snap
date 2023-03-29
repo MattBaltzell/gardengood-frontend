@@ -22,6 +22,7 @@ exports[`SignupForm component tests matches snapshot 1`] = `
       <input
         autocomplete="username"
         class="text-input"
+        data-testid="username"
         name="username"
         type="text"
         value=""
@@ -34,6 +35,7 @@ exports[`SignupForm component tests matches snapshot 1`] = `
       <input
         autocomplete="email"
         class="text-input"
+        data-testid="email"
         name="email"
         type="text"
         value=""
@@ -45,6 +47,7 @@ exports[`SignupForm component tests matches snapshot 1`] = `
       </label>
       <input
         class="password-input"
+        data-testid="password"
         name="password"
         type="password"
         value=""
@@ -56,6 +59,7 @@ exports[`SignupForm component tests matches snapshot 1`] = `
       </label>
       <input
         class="text-input"
+        data-testid="firstname"
         name="firstName"
         type="text"
         value=""
@@ -67,6 +71,7 @@ exports[`SignupForm component tests matches snapshot 1`] = `
       </label>
       <input
         class="text-input"
+        data-testid="lastname"
         name="lastName"
         type="text"
         value=""
@@ -78,6 +83,7 @@ exports[`SignupForm component tests matches snapshot 1`] = `
       </label>
       <input
         class="text-input"
+        data-testid="zipcode"
         name="zipCode"
         pattern="[0-9]{5}"
         type="text"

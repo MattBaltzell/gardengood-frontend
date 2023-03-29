@@ -1,5 +1,12 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  act,
+  waitFor,
+} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import LoginForm from "./LoginForm";
 
@@ -32,5 +39,27 @@ describe("LoginForm component tests", function () {
     fireEvent.click(buttonEl);
     const requiredErrors = await screen.findAllByText("Required");
     expect(requiredErrors.length).toEqual(2);
+  });
+
+  it("allows user to log in", async function () {
+    const login = jest.fn().mockResolvedValue({});
+
+    render(
+      <MemoryRouter>
+        <LoginForm login={login} />
+      </MemoryRouter>
+    );
+    act(() => {
+      userEvent.type(screen.getByTestId("username"), "tester1");
+      userEvent.type(screen.getByTestId("password"), "password");
+      userEvent.click(screen.getByText("Log In"));
+    });
+
+    await waitFor(() =>
+      expect(login).toBeCalledWith({
+        username: "tester1",
+        password: "password",
+      })
+    );
   });
 });

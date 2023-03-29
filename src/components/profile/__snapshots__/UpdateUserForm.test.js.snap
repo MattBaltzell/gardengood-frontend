@@ -24,6 +24,7 @@ exports[`User component tests matches snapshot 1`] = `
       </label>
       <input
         class="text-input"
+        data-testid="username"
         disabled=""
         name="username"
         type="text"
@@ -37,6 +38,7 @@ exports[`User component tests matches snapshot 1`] = `
       <input
         autocomplete="email"
         class="text-input"
+        data-testid="email"
         name="email"
         type="text"
         value="test@test.com"
@@ -48,6 +50,7 @@ exports[`User component tests matches snapshot 1`] = `
       </label>
       <input
         class="text-input"
+        data-testid="firstname"
         name="firstName"
         type="text"
         value="firstname"
@@ -59,6 +62,7 @@ exports[`User component tests matches snapshot 1`] = `
       </label>
       <input
         class="text-input"
+        data-testid="lastname"
         name="lastName"
         type="text"
         value="lastname"
@@ -70,6 +74,7 @@ exports[`User component tests matches snapshot 1`] = `
       </label>
       <input
         class="text-input"
+        data-testid="zipcode"
         name="zipCode"
         pattern="[0-9]{5}"
         type="text"

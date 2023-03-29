@@ -17,7 +17,12 @@ export const MyTextInput = ({ label, ...props }) => {
           <div className="error">{meta.error}</div>
         ) : null}
       </label>
-      <input className="text-input" {...field} {...props} />
+      <input
+        className="text-input"
+        {...field}
+        {...props}
+        data-testid={label.replace(/\s/g, "").toLowerCase()}
+      />
     </>
   );
 };
@@ -33,7 +38,12 @@ export const MyPasswordInput = ({ label, ...props }) => {
         <div className="error">{meta.error}</div>
       ) : null}
       <label htmlFor={props.id || props.name}>{label}</label>
-      <input className="password-input" {...field} {...props} />
+      <input
+        className="password-input"
+        {...field}
+        {...props}
+        data-testid={label.replace(/\s/g, "").toLowerCase()}
+      />
     </>
   );
 };
