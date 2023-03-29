@@ -1,8 +1,14 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  act,
+  waitFor,
+} from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import UpdateUserForm from "./UpdateUserForm";
-
+import userEvent from "@testing-library/user-event";
 import UserContext from "../auth/UserContext";
 
 const user = {
@@ -53,5 +59,33 @@ describe("User component tests", function () {
     expect(requiredError).toBeInTheDocument();
     const requiredErrors = await screen.findAllByText("Required");
     expect(requiredErrors.length).toEqual(1);
+  });
+
+  it("calls the update function with the correct data", async function () {
+    const update = jest.fn().mockResolvedValue({});
+
+    render(
+      <MemoryRouter>
+        <UserContext.Provider value={user}>
+          <UpdateUserForm update={update} />
+        </UserContext.Provider>
+      </MemoryRouter>
+    );
+    act(() => {
+      const firstNameInput = screen.getByTestId("firstname");
+      userEvent.clear(firstNameInput);
+      userEvent.type(firstNameInput, "namechanged");
+      userEvent.click(screen.getByRole("button"));
+    });
+
+    await waitFor(() =>
+      expect(update).toBeCalledWith({
+        username: "testuser",
+        email: "test@test.com",
+        firstName: "namechanged",
+        lastName: "lastname",
+        zipCode: "36830",
+      })
+    );
   });
 });
