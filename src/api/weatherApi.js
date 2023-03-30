@@ -1,8 +1,7 @@
 import axios from "axios";
 const BASE_URL = "http://api.weatherapi.com/v1";
 
-const API_KEY =
-  process.env.WEATHER_APP_API_KEY || "3a7b7ff9752a4f73966181105230302";
+const API_KEY = process.env.WEATHER_APP_API_KEY;
 
 class WeatherApi {
   static async request(endpoint, data = {}, method = "get") {
