@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate, Link, Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { MyTextInput, MyPasswordInput } from "../form/Forms";
@@ -11,7 +11,7 @@ const LoginForm = ({ login, toast }) => {
   // Pass the useFormik() hook initial form values, a validate function that will be called when
   // form values change or fields are blurred, and a submit function that will
   // be called when the form is submitted
-  const navigate = useNavigate();
+
   const currUser = useContext(UserContext);
   const [submissionErrors, setSubmissionErrors] = useState([]);
 
