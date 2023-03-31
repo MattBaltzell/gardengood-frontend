@@ -8,6 +8,7 @@ import UserContext from "./components/auth/UserContext";
 import WeatherContext from "./WeatherContext";
 import jwt_decode from "jwt-decode";
 import { ToastContainer, toast } from "react-toastify";
+import useLoading from "./hooks/useLoading";
 
 function App() {
   const [currUser, setCurrUser] = useState(null);
@@ -15,6 +16,7 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem("gardengood-token"));
   const [userWasUpdated, setUserWasUpdated] = useState(false);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [isLoading, handleIsLoading] = useLoading(true);
 
   useEffect(() => {
     const getCurrUser = async () => {
@@ -29,10 +31,11 @@ function App() {
           console.error(error);
         }
       }
+      handleIsLoading(false);
     };
     getCurrUser();
     setUserWasUpdated(false);
-  }, [token, userWasUpdated]);
+  }, [token, userWasUpdated, handleIsLoading]);
 
   useEffect(() => {
     const getWeather = async () => {
@@ -60,9 +63,9 @@ function App() {
     return toast[type](msg);
   };
 
-  const handleMenuIsOpen = () => {
+  const handleMenuIsOpen = useCallback(() => {
     setMenuIsOpen(!menuIsOpen);
-  };
+  }, [menuIsOpen]);
 
   const handleLogin = async ({ username, password }) => {
     try {
@@ -159,6 +162,7 @@ function App() {
             update={handleUpdate}
             logout={handleLogout}
             toast={handleToast}
+            isLoading={isLoading}
           />
         </WeatherContext.Provider>
       </UserContext.Provider>

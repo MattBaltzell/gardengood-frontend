@@ -10,13 +10,13 @@ import UpdateUserForm from "../profile/UpdateUserForm";
 
 import PrivateRoutes from "./PrivateRoutes";
 
-const Router = ({ signup, login, update, toast }) => {
+const Router = ({ signup, login, update, toast, isLoading }) => {
   return (
     <div className="container">
       <Routes>
         <Route path="/" element={<Home />} />
 
-        <Route element={<PrivateRoutes />}>
+        <Route element={<PrivateRoutes isLoading={isLoading} />}>
           <Route element={<PlantSearch />} path="/plants" exact />
           <Route element={<Plant />} path="/plants/:id" />
           <Route
