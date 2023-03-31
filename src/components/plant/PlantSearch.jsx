@@ -29,7 +29,7 @@ const PlantSearch = () => {
       }
     }
     getPlants(searchTerm);
-  }, [searchTerm]);
+  }, [searchTerm, handleIsLoading]);
 
   const INITIAL_STATE = { searchTerm: "" };
   const [formData, setFormData] = useState(INITIAL_STATE);

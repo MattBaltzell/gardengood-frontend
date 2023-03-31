@@ -22,7 +22,7 @@ const Plant = () => {
       handleIsLoading(false);
     };
     getPlant();
-  }, [id]);
+  }, [id, handleIsLoading]);
 
   if (!plant.name) {
     return <NotFound />;
