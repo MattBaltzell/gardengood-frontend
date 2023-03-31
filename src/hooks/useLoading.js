@@ -5,7 +5,7 @@ const useLoading = (init = true) => {
 
   const handleIsLoading = useCallback((val) => {
     setIsLoading(val);
-  });
+  }, []);
 
   return [isLoading, handleIsLoading];
 };
