@@ -32,7 +32,7 @@ const Navbar = ({ logout, menuIsOpen, handleMenuIsOpen }) => {
       // Cleanup the event listener
       document.removeEventListener("mouseup", checkIfClickedOutside);
     };
-  }, [menuIsOpen]);
+  }, [menuIsOpen, handleMenuIsOpen]);
 
   const handleLogout = async () => {
     await logout();
